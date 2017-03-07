@@ -978,6 +978,10 @@ bool Creature::Create(ObjectGuid::LowType guidlow, Map* map, uint32 entry, float
         SetDisplayId(displayID);
         SetNativeDisplayId(displayID);
         SetByteValue(UNIT_FIELD_BYTES_0, UNIT_BYTES_0_OFFSET_GENDER, minfo->gender);
+        Unit::AuraEffectList const& transformAuras = GetAuraEffectsByType(SPELL_AURA_TRANSFORM);
+        Unit::AuraEffectList const& shapeshiftAuras = GetAuraEffectsByType(SPELL_AURA_MOD_SHAPESHIFT);
+        if (transformAuras.empty() && shapeshiftAuras.empty())
+            SetDisplayId(display.CreatureDisplayID, display.DisplayScale);
     }
 
     LastUsedScriptID = GetScriptId();
