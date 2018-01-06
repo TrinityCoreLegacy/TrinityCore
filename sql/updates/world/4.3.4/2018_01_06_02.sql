@@ -1,0 +1,2 @@
+delete from `creature_loot_template` WHERE `Entry`=13159 AND `Item`=1307;
+insert into `creature_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`, `Comment`) values('13159','1307','0','100','0','1','0','1','1',NULL);
