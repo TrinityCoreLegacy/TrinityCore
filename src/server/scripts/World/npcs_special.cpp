@@ -164,6 +164,13 @@ public:
             return nullptr;
         }
 
+        void UpdateAI(uint32 diff) override
+        {
+            ScriptedAI::UpdateAI(diff);
+
+            inLineOfSightSinceLastUpdate.clear();
+        }
+
         void MoveInLineOfSight(Unit* who) override
         {
             if (!SpawnAssoc)
@@ -187,6 +194,10 @@ public:
                 {
                     case SPAWNTYPE_ALARMBOT:
                     {
+                        // handle only 1 change for world update for each target
+                        if (!inLineOfSightSinceLastUpdate.insert(who->GetGUID()).second)
+                            return;
+
                         if (!who->IsWithinDistInMap(me, RANGE_GUARDS_MARK))
                             return;
 
@@ -238,6 +249,8 @@ public:
                 }
             }
         }
+
+        GuidSet inLineOfSightSinceLastUpdate;
     };
 
     CreatureAI* GetAI(Creature* creature) const override
