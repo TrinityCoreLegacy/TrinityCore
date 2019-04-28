@@ -11538,7 +11538,7 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
             if (pet->IsAIEnabled())
                 pet->AI()->KilledUnit(victim);
             else
-                TC_LOG_ERROR("entities.unit", "Pet doesn't have any AI in Unit::Kill(). %s", pet->GetDebugInfo());
+                TC_LOG_ERROR("entities.unit", "Pet doesn't have any AI in Unit::Kill(). %s", pet->GetDebugInfo().c_str());
         }
     }
 
