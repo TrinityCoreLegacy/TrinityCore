@@ -11534,7 +11534,12 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
     {
         Pet* pet = player->GetPet();
         if (pet && pet->IsAlive() && pet->isControlled())
-            ASSERT_NOTNULL(pet->AI())->KilledUnit(victim);
+        {
+            if (pet->IsAIEnabled())
+                pet->AI()->KilledUnit(victim);
+            else
+                TC_LOG_ERROR("entities.unit", "Pet doesn't have any AI in Unit::Kill(). %s", pet->GetDebugInfo());
+        }
     }
 
     // 10% durability loss on death
