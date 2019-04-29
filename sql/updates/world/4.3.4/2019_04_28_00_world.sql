@@ -5,9 +5,9 @@ INSERT INTO `spell_area` (`spell`, `area`, `quest_start`, `quest_end`, `autocast
 (49416, 5040, 25316, 25316, 1, 2, 2, 11);
 
 -- Gameobject focus (203087)
-DELETE FROM `gameobject` WHERE `guid`= 19;
+DELETE FROM `gameobject` WHERE `guid`= 200888;
 INSERT INTO `gameobject` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseID`, `position_x`, `position_y`, `position_z`, `orientation`, `rotation0`, `rotation1`, `rotation2`, `rotation3`, `spawntimesecs`, `animprogress`, `state`, `VerifiedBuild`) VALUES
-(19, 203087, 1, 0, 0, 1, 169, 5758.737, -3297.48, 1604.599, 0, 0, 0, 0, 1, 6000, 100, 1, 0);
+(200888, 203087, 1, 0, 0, 1, 169, 5758.737, -3297.48, 1604.599, 0, 0, 0, 0, 1, 6000, 100, 1, 0);
 
 -- Remove  duplicate spawns
 DELETE FROM `creature` WHERE `guid` IN (394598, 384268);
