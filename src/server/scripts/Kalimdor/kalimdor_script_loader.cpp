@@ -119,6 +119,7 @@ void AddSC_desolace();
 void AddSC_durotar();
 void AddSC_felwood();
 void AddSC_moonglade();
+void AddSC_mount_hyjal();
 void AddSC_mulgore();
 void AddSC_silithus();
 void AddSC_tanaris();
@@ -234,6 +235,7 @@ void AddKalimdorScripts()
     AddSC_durotar();
     AddSC_felwood();
     AddSC_moonglade();
+    AddSC_mount_hyjal();
     AddSC_mulgore();
     AddSC_silithus();
     AddSC_tanaris();
