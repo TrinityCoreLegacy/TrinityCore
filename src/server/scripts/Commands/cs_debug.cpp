@@ -72,6 +72,11 @@ public:
             { "setphaseshift", rbac::RBAC_PERM_COMMAND_DEBUG_SEND_SETPHASESHIFT, false, &HandleDebugSendSetPhaseShiftCommand,   "" },
             { "spellfail",     rbac::RBAC_PERM_COMMAND_DEBUG_SEND_SPELLFAIL,     false, &HandleDebugSendSpellFailCommand,       "" },
         };
+        static std::vector<ChatCommand> debugAsanCommandTable =
+        {
+            { "memoryleak",    rbac::RBAC_PERM_COMMAND_DEBUG_ASAN,               true,  &HandleDebugMemoryLeak,         "" },
+            { "outofbounds",   rbac::RBAC_PERM_COMMAND_DEBUG_ASAN,               true,  &HandleDebugOutOfBounds,        "" },
+        };
         static std::vector<ChatCommand> debugCommandTable =
         {
             { "setbit",        rbac::RBAC_PERM_COMMAND_DEBUG_SETBIT,        false, &HandleDebugSet32BitCommand,         "" },
@@ -106,6 +111,7 @@ public:
             { "raidreset",     rbac::RBAC_PERM_COMMAND_INSTANCE_UNBIND,     false, &HandleDebugRaidResetCommand,        "" },
             { "neargraveyard", rbac::RBAC_PERM_COMMAND_NEARGRAVEYARD,       false, &HandleDebugNearGraveyard,           "" },
             { "dummy",         rbac::RBAC_PERM_COMMAND_DEBUG_DUMMY,         false, &HandleDebugDummyCommand,            "" },
+            { "asan",          rbac::RBAC_PERM_COMMAND_DEBUG_ASAN,          true,  nullptr,                             "", debugAsanCommandTable },
         };
         static std::vector<ChatCommand> commandTable =
         {
@@ -1614,6 +1620,22 @@ public:
         else
             handler->PSendSysMessage(LANG_COMMAND_NEARGRAVEYARD_NOTFOUND);
 
+        return true;
+    }
+
+    static bool HandleDebugOutOfBounds(ChatHandler* handler, CommandArgs* /*args*/)
+    {
+        uint8 stack_array[10] = {};
+        int size = 10;
+
+        handler->PSendSysMessage("Triggered an array out of bounds read at address %p, value %u", stack_array + size, stack_array[size]);
+        return true;
+    }
+
+    static bool HandleDebugMemoryLeak(ChatHandler* handler, CommandArgs* /*args*/)
+    {
+        uint8* leak = new uint8();
+        handler->PSendSysMessage("Leaked 1 uint8 object at address %p", leak);
         return true;
     }
 
