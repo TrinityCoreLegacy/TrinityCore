@@ -257,6 +257,7 @@ ByteBuffer& operator<<(ByteBuffer& buf, Position::ConstStreamer<Position::Packed
 std::string WorldLocation::GetDebugInfo() const
 {
     std::stringstream sstr;
-    sstr << "MapID: " << m_mapId << " " << Position::ToString();
+    MapEntry const* mapEntry = sMapStore.LookupEntry(m_mapId);
+    sstr << "MapID: " << m_mapId << " Map name: '" << (mapEntry ? mapEntry->name : "<not found>") <<"' " << Position::ToString();
     return sstr.str();
 }
