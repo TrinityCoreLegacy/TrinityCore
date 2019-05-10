@@ -241,6 +241,14 @@ void UnitAI::FillAISpellInfo()
     }
 }
 
+std::string UnitAI::GetDebugInfo() const
+{
+    std::stringstream sstr;
+    sstr << std::boolalpha
+         << "Me: " << (me ? me->GetDebugInfo() : "NULL");
+    return sstr.str();
+}
+
 ThreatManager& UnitAI::GetThreatManager()
 {
     return me->getThreatManager();

@@ -3025,3 +3025,12 @@ float Creature::GetSparringHealthLimit() const
 {
     return sObjectMgr->GetSparringHealthLimitFor(GetEntry());
 }
+
+std::string Creature::GetDebugInfo() const
+{
+    std::stringstream sstr;
+    sstr << Unit::GetDebugInfo() << "\n"
+        << "AIName: " << GetAIName() << " ScriptName: " << GetScriptName()
+        << " WaypointPath: " << GetWaypointPath() << " SpawnId: " << GetSpawnId();
+    return sstr.str();
+}

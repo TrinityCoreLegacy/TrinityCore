@@ -308,6 +308,8 @@ class TC_GAME_API UnitAI
         // Called when the dialog status between a player and the creature is requested.
         virtual uint32 GetDialogStatus(Player* /*player*/);
 
+        virtual std::string GetDebugInfo() const;
+
     private:
         UnitAI(UnitAI const& right) = delete;
         UnitAI& operator=(UnitAI const& right) = delete;

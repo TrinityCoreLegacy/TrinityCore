@@ -251,6 +251,8 @@ class WorldLocation : public Position
         uint32 GetMapId() const { return m_mapId; }
 
         uint32 m_mapId;
+
+        std::string GetDebugInfo() const;
 };
 
 

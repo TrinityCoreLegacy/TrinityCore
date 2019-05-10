@@ -171,6 +171,8 @@ class TC_GAME_API Object
         AreaTrigger* ToAreaTrigger() { if (GetTypeId() == TYPEID_AREATRIGGER) return reinterpret_cast<AreaTrigger*>(this); else return nullptr; }
         AreaTrigger const* ToAreaTrigger() const { if (GetTypeId() == TYPEID_AREATRIGGER) return reinterpret_cast<AreaTrigger const*>(this); else return nullptr; }
 
+        virtual std::string GetDebugInfo() const;
+
     protected:
         Object();
 
@@ -477,6 +479,8 @@ class TC_GAME_API WorldObject : public Object, public WorldLocation
         void SetMovementAnimKitId(uint16 animKitId);
         uint16 GetMeleeAnimKitId() const { return m_meleeAnimKitId; }
         void SetMeleeAnimKitId(uint16 animKitId);
+
+        std::string GetDebugInfo() const override;
 
     protected:
         std::string m_name;

@@ -39,13 +39,15 @@ class TC_GAME_API TempSummon : public Creature
         Unit* GetSummoner() const;
         Creature* GetSummonerCreatureBase() const;
         ObjectGuid GetSummonerGUID() const { return m_summonerGUID; }
-        TempSummonType const& GetSummonType() { return m_type; }
+        TempSummonType GetSummonType() const { return m_type; }
         uint32 GetTimer() const { return m_timer; }
 
         void SetVisibleBySummonerOnly(bool visibleBySummonerOnly) { m_visibleBySummonerOnly = visibleBySummonerOnly; }
         bool IsVisibleBySummonerOnly() const { return m_visibleBySummonerOnly; }
 
         SummonPropertiesEntry const* const m_Properties;
+
+        std::string GetDebugInfo() const override;
     private:
         TempSummonType m_type;
         uint32 m_timer;
@@ -66,6 +68,8 @@ class TC_GAME_API Minion : public TempSummon
         bool IsPetGhoul() const { return GetEntry() == 26125; } // Ghoul may be guardian or pet
         bool IsSpiritWolf() const { return GetEntry() == 29264; } // Spirit wolf from feral spirits
         bool IsGuardianPet() const;
+
+        std::string GetDebugInfo() const override;
     protected:
         Unit* const m_owner;
         float m_followAngle;
@@ -90,6 +94,7 @@ class TC_GAME_API Guardian : public Minion
 
         int32 GetBonusDamage() const { return m_bonusSpellDamage; }
         void SetBonusDamage(int32 damage);
+        std::string GetDebugInfo() const override;
     protected:
         int32   m_bonusSpellDamage;
         float   m_statFromOwner[MAX_STATS];
