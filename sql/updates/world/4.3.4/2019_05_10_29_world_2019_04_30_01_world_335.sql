@@ -1,3 +1,4 @@
+/*
 -- 
 -- Quest "Taking Back Silithus"
 DELETE FROM `quest_details` WHERE `ID` IN (8275,8276);
@@ -447,3 +448,4 @@ INSERT INTO `quest_details` (`ID`, `Emote1`, `Emote2`, `Emote3`, `Emote4`, `Emot
 (7786,1,1,0,0,0,0,0,0,0);
 UPDATE `quest_request_items` SET `EmoteOnIncomplete`=5, `EmoteOnComplete`=5 WHERE `ID`=7786;
 UPDATE `quest_offer_reward` SET `Emote1`=1, `Emote2`=25, `Emote3`=5, `Emote4`=22 WHERE `ID`=7786;
+*/

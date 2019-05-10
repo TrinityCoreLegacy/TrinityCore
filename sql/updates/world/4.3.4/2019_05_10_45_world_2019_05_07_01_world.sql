@@ -261,8 +261,10 @@ INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry
 (13, 1, 43068, 0, 2, 31, 0, 3, 24093, 0, 0, 0, 0, "", "Spell Brave's Flare effect"),
 (13, 1, 43068, 0, 3, 31, 0, 3, 24094, 0, 0, 0, 0, "", "Spell Brave's Flare effect");
 
+/*
 DELETE FROM `creature_template_movement` WHERE `CreatureId`= 24132;
 INSERT INTO `creature_template_movement` (`CreatureId`,`Ground`,`Swim`,`Flight`,`Rooted`) VALUES
 (24132, 0, 0, 1, 0);
+*/
 
 UPDATE `smart_scripts`  SET `target_param2`=35 WHERE `entryorguid` IN (24100,24098,24102) AND `source_type`=0 AND `id` IN (1,2);

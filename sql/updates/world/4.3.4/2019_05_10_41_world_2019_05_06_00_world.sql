@@ -169,10 +169,10 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`,`position
 
 DELETE FROM `waypoint_scripts` WHERE id IN (493,494);
 INSERT INTO `waypoint_scripts` (id, delay, command, datalong, datalong2, dataint,guid) VALUES
-(493,2,1,69,1,0,958), 
-(493,28,1,0,0,0,959), 
-(494,2,1,69,1,0,960), 
-(494,13,1,0,0,0,961);
+(493,2,1,69,1,0,971), 
+(493,28,1,0,0,0,972), 
+(494,2,1,69,1,0,973), 
+(494,13,1,0,0,0,974);
 
 -- Tormented Soul
 DELETE FROM `creature_addon` WHERE `guid` IN (72614,72615,72616,72622,72628,72629,72634,72635);
@@ -351,7 +351,7 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`,`position
 
 DELETE FROM `waypoint_scripts` WHERE id IN (491,492);
 INSERT INTO `waypoint_scripts` (id, delay, command, datalong, datalong2, dataint,guid) VALUES
-(491,3,1,69,1,0,954), 
-(491,57,1,0,0,0,955),
-(492,3,1,69,1,0,956), 
-(492,17,1,0,0,0,957);
+(491,3,1,69,1,0,975), 
+(491,57,1,0,0,0,976),
+(492,3,1,69,1,0,977), 
+(492,17,1,0,0,0,978);

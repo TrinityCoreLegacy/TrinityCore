@@ -1,3 +1,4 @@
+/*
 -- The Stagnant Oasis
 DELETE FROM `event_scripts` WHERE `id` = 525;
 INSERT INTO `event_scripts` (`id`, `delay`, `command`, `datalong`, `datalong2`, `dataint`, `x`, `y`, `z`, `o`) VALUES
@@ -18,3 +19,4 @@ INSERT INTO `gameobject` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `positi
 DELETE FROM `gameobject_loot_template` WHERE `entry` = 2603;
 INSERT INTO `gameobject_loot_template` (`entry`, `item`, `Chance`, `lootmode`, `groupid`, `MinCount`, `Maxcount`) VALUES
 (2603, 5066, 100, 1, 0, 1, 1);
+*/

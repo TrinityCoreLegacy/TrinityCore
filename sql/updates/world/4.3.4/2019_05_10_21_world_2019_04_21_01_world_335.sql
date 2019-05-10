@@ -1,3 +1,4 @@
+/*
 -- Elenna Edune
 UPDATE `creature` SET `position_x`=2862.77, `position_y`=708.663, `position_z`=103.374, `spawndist`=0, `MovementType`=2 WHERE `guid`=33027;
 UPDATE `creature` SET `position_x`=2863.40, `position_y`=707.171, `position_z`=103.124, `spawndist`=0, `MovementType`=0 WHERE `guid`=33070;
@@ -187,3 +188,4 @@ INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Lan
 (24735,4,0,"I'd better ask before I go herbing this time. I don't want to get attacked by another wolf.",12,2,100,0,0,0,23733,0,"Becanna Edune"),
 (24735,5,0,"I am sure a noble soldier of the Alliance has better things on his mind. Oh! Elenna found some herbs so I'm going to go pick them up.",12,2,100,1,0,0,23735,0,"Becanna Edune"),
 (24735,6,0,"%s replants the herbs nearby.",16,0,100,0,0,0,23736,0,"Becanna Edune");
+*/

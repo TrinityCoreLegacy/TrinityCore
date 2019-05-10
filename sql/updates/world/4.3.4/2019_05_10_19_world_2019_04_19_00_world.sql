@@ -227,9 +227,11 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 (103640, 18409, 546, 3716, 0, 3, 1, 0, 0, 24.9916, -372.869, 69.4133, 5.5676, 7200, 0, 0, 0, 0, 0, 0, 0, 0, 14545); 
 
 UPDATE `smart_scripts` SET `action_param2`=103431 WHERE `entryorguid`=17826 AND `source_type`=0 AND `id`=13;
+/*
 DELETE FROM `creature_template_movement` WHERE `CreatureId` IN (18409,20170,17992);
 INSERT INTO `creature_template_movement` (`CreatureId`,`Ground`,`Swim`,`Flight`,`Rooted`) VALUES
 (18409, 1, 1, 2, 0),(20170, 1, 1, 2, 0),(17992, 0, 0, 1, 0);
+*/
 UPDATE `creature_template` SET `unit_flags`= 32832 WHERE `entry` IN (20465,21943);
 UPDATE `creature` SET `spawndist`=8,  `MovementType`=1 WHERE `id` IN (20465);
 

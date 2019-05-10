@@ -1,3 +1,4 @@
+/*
 -- 
 DELETE FROM `creature` WHERE `guid` IN (62028,62029);
 INSERT INTO `creature` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`,`spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`) VALUES
@@ -16,3 +17,4 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 DELETE FROM `game_event_creature` WHERE `guid` IN (62028,62029) AND `eventEntry`=52;
 INSERT INTO `game_event_creature` (`eventEntry`, `guid`) VALUES 
 (52, 62028),(52, 62029);
+*/

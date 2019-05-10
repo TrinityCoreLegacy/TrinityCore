@@ -51,6 +51,9 @@ DELETE FROM `creature_addon` WHERE `guid` IN (62820,62823,62825,62832);
 DELETE FROM `waypoint_data` WHERE `id` IN (628200, 628230, 628250, 628320); 
 
 UPDATE `creature_template` SET `flags_extra`= `flags_extra`|128 WHERE `entry`=17552;
+
+/*
 DELETE FROM `creature_template_movement` WHERE `CreatureId`= 17552;
 INSERT INTO `creature_template_movement` (`CreatureId`,`Ground`,`Swim`,`Flight`,`Rooted`) VALUES
 (17552, 0, 0, 1, 0);
+*/

@@ -1,3 +1,4 @@
+/*
 -- Gilmorian
 UPDATE `creature_template` SET `AIName`="SmartAI" WHERE `entry`=14447;
 DELETE FROM `smart_scripts` WHERE `entryorguid`=14447 AND `source_type`=0;
@@ -29,3 +30,4 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 DELETE FROM `creature_text` WHERE `CreatureID`=4394;
 INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES
 (4394,0,0,"The surface of the %s begins to bubble.",16,0,100,0,0,0,16647,0,"Bubbling Swamp Ooze");
+*/

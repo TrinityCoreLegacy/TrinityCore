@@ -18,6 +18,8 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 (103916, 24013, 571, 0, 0, 1, 1, 17311, 0, 2457.49, -3619.88, 267.007, 1.95917, 300, 0, 0, 8982, 3155, 0, 0, 0, 0, 0),
 (103917, 24013, 571, 0, 0, 1, 1, 17311, 0, 2486.59, -3627.70, 267.017, 0.70742, 300, 0, 0, 8982, 3155, 0, 0, 0, 0, 0);
 
+/*
 DELETE FROM `creature_template_movement` WHERE `CreatureId`= 24013;
 INSERT INTO `creature_template_movement` (`CreatureId`,`Ground`,`Swim`,`Flight`,`Rooted`) VALUES
 (24013, 1, 1, 2, 0);
+*/

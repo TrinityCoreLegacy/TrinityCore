@@ -1,3 +1,4 @@
+/*
 -- 
 UPDATE `creature_template_addon` SET `auras` = '3616' WHERE `entry` IN (
 2208, -- Greymist Tidehunter
@@ -70,3 +71,4 @@ UPDATE `creature_template` SET `AIName`="" WHERE entry IN (1110,544,5422,8601,38
 DELETE FROM `smart_scripts` WHERE `entryorguid` IN(7110,6554,6551) AND `source_type`=0 AND `id`=1;
 DELETE FROM `smart_scripts` WHERE `entryorguid` IN(909,1110,544,5422,8601,3807,3806,5224) AND `source_type`=0 AND `id` IN (0,1);
 DELETE FROM `smart_scripts` WHERE `entryorguid` IN(3767,5856) AND `source_type`=0 AND `id`=0;
+*/
