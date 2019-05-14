@@ -3,9 +3,12 @@ DELETE FROM `creature` WHERE `guid` = 104176;
 INSERT INTO `creature` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `curhealth`, `curmana`, `spawndist`, `MovementType`) VALUES
 (104176, 18778, 558, 3, 1, 141.688, -17.801, 9.30814, 2.129302, 7200, 3785, 2790, 0, 0);
 UPDATE `creature_template` SET `unit_flags` = 0, `flags_extra` = `flags_extra`|128 WHERE `entry` IN (18778,20304);
+
+/*
 DELETE FROM `creature_template_movement` WHERE `CreatureId` IN (18778,20304);
 INSERT INTO `creature_template_movement` (`CreatureId`,`Ground`,`Swim`,`Flight`,`Rooted`) VALUES
 (18778, 0, 0, 1, 0), (20304, 0, 0, 1, 0);
+*/
 
 DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 13 AND `SourceEntry` IN (32930);
 INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `ErrorTextId`, `ScriptName`, `Comment`) VALUES
@@ -36,9 +39,12 @@ INSERT INTO `creature` (`guid`, `id`,`map`, `spawnMask`, `phaseMask`, `position_
 (104343, 18726, 558, 3, 1, 148.9696, -195.7763, 26.32425, 3.020732, 7200, 3914, 2846, 0, 2),
 (104369, 18726, 558, 3, 1, 228.2336, -154.235, 39.60511, 4.203284, 7200, 3914, 2846, 0, 2),
 (104500, 18726, 558, 3, 1, -23.60418, -384.0119, 52.44639, 1.562078, 7200, 3914, 2846, 0, 2);
+
+/*
 DELETE FROM `creature_template_movement` WHERE `CreatureId` IN (18726,20307);
 INSERT INTO `creature_template_movement` (`CreatureId`,`Ground`,`Swim`,`Flight`,`Rooted`) VALUES
 (18726, 0, 0, 1, 0), (20307, 0, 0, 1, 0);
+*/
 
 DELETE FROM `creature_addon` WHERE `guid` IN (104186, 104200, 104340, 104343, 104369, 104500);
 INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `auras`, `visibilityDistanceType`) VALUES

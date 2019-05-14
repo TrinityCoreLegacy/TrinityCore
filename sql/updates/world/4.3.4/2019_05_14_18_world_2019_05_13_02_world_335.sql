@@ -1,3 +1,4 @@
+/*
 -- The Plains Vision
 DELETE FROM `creature_text` WHERE `CreatureID`=2983 AND `GroupID`=0; -- Remove wrong text
 UPDATE `creature_text` SET `Emote`=393, `Sound`=1018 WHERE `CreatureID`=2983 AND `GroupID` IN (1,2);
@@ -14,3 +15,4 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=22 AND `SourceEntry`=2984;
 INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `SourceId`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionTarget`, `ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `NegativeCondition`, `ErrorType`, `ErrorTextId`, `ScriptName`, `Comment`) VALUES
 (22,1,2984,0,0,28,0,772,0,0,0,0,0,"","SAI triggers only if player has quest 'Rite of Vision (Part 3)' completed");
+*/

@@ -1,3 +1,4 @@
+/*
 -- Quest "The Hunt Begins"
 DELETE FROM `quest_details` WHERE `ID`=747;
 INSERT INTO `quest_details` (`ID`, `Emote1`, `Emote2`, `Emote3`, `Emote4`, `EmoteDelay1`, `EmoteDelay2`, `EmoteDelay3`, `EmoteDelay4`, `VerifiedBuild`) VALUES
@@ -328,3 +329,4 @@ INSERT INTO `quest_details` (`ID`, `Emote1`, `Emote2`, `Emote3`, `Emote4`, `Emot
 (5723,1,1,0,0,0,0,0,0,0);
 UPDATE `quest_request_items` SET `EmoteOnIncomplete`=6 WHERE `ID`=5723;
 UPDATE `quest_offer_reward` SET `Emote1`=2, `Emote2`=1 WHERE `ID`=5723;
+*/
