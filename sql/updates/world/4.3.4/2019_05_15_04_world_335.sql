@@ -1,3 +1,4 @@
+/*
 -- Message to the Wildhammer
 UPDATE `gameobject_template` SET `AIName`="SmartGameObjectAI" WHERE `entry`=179911;
 DELETE FROM `smart_scripts` WHERE `entryorguid`=179911 AND `source_type`=1;
@@ -8,3 +9,4 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 DELETE FROM `creature_text` WHERE `CreatureID`=5635;
 INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES
 (5635,0,0,"Invaders! Invaders! We're under attack, boys! Get 'em!",14,0,100,0,0,0,10009,2,"Falstad Wildhammer");
+*/

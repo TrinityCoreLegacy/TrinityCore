@@ -1,3 +1,4 @@
+/*
 -- Bath'rah the Windwatcher
 DELETE FROM `creature_text` WHERE `CreatureID`=6176 AND `GroupID` IN (2,3);
 INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES
@@ -26,3 +27,4 @@ INSERT INTO `waypoints` (`entry`, `pointid`, `position_x`, `position_y`, `positi
 -- Spirit Totem
 DELETE FROM `creature_template_addon` WHERE `entry`=15363;
 INSERT INTO `creature_template_addon` (`entry`, `auras`) VALUES (15363,25001);
+*/

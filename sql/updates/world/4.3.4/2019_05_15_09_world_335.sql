@@ -1,3 +1,4 @@
+/*
 -- Troyas Moonbreeze
 DELETE FROM `smart_scripts` WHERE `entryorguid`=7764 AND `source_type`=0 AND `id` IN (1,2,3);
 DELETE FROM `smart_scripts` WHERE `entryorguid` IN (776400,776401) AND `source_type`=9;
@@ -19,3 +20,4 @@ INSERT INTO `waypoints` (`entry`, `pointid`, `position_x`, `position_y`, `positi
 (7764,2,-4474.9,3232.88,13.7295,"");
 
 UPDATE `creature_text` SET `Emote`=0 WHERE `CreatureID`=7764 AND `GroupID`=2;
+*/

@@ -1,3 +1,4 @@
+/*
 -- Sprinkle
 DELETE FROM `creature_text` WHERE `CreatureID`=7583 AND `GroupID`=3;
 INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES
@@ -12,3 +13,4 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (758302,9,2,0,0,0,100,0,1000,1000,0,0,17,69,0,0,0,0,0,1,0,0,0,0,0,0,0,"Sprinkle - On Script - Set Emote State 'Usestanding'"),
 (758302,9,3,0,0,0,100,0,6000,6000,0,0,17,0,0,0,0,0,0,1,0,0,0,0,0,0,0,"Sprinkle - On Script - Set Emote State 'None'"),
 (758302,9,4,0,0,0,100,0,0,0,0,0,82,2,0,0,0,0,0,1,0,0,0,0,0,0,0,"Sprinkle - On Script - Add Npc Flag Questgiver");
+*/
