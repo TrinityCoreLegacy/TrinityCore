@@ -69,7 +69,8 @@ enum PaladinSpells
     SPELL_PALADIN_SANCTIFIED_WRATH_TALENT_R1     = 53375,
     SPELL_PALADIN_SEAL_OF_RIGHTEOUSNESS          = 25742,
     SPELL_PALADIN_SWIFT_RETRIBUTION_R1           = 53379,
-    SPELL_PALADIN_TEMPLARS_VERDICT               = 85256
+    SPELL_PALADIN_TEMPLARS_VERDICT               = 85256,
+    SPELL_PALADIN_SEAL_OF_TRUTH                  = 31801
 };
 
 enum MiscSpells
@@ -835,26 +836,48 @@ class spell_pal_judgement : public SpellScriptLoader
 
             bool Validate(SpellInfo const* /*spellInfo*/) override
             {
-                return ValidateSpellInfo({ SPELL_PALADIN_JUDGEMENT_DAMAGE });
+                return ValidateSpellInfo(
+                {
+                    SPELL_PALADIN_JUDGEMENT_DAMAGE,
+                    SPELL_PALADIN_SEAL_OF_RIGHTEOUSNESS,
+                    SPELL_PALADIN_SEAL_OF_TRUTH,
+                });
             }
 
             void HandleScriptEffect(SpellEffIndex /*effIndex*/)
             {
+                Unit* caster = GetCaster();
+                if (!caster)
+                    return;
+
                 uint32 spellId = SPELL_PALADIN_JUDGEMENT_DAMAGE;
+                int32 bp = 0;
+                float ap = caster->GetTotalAttackPowerValue(BASE_ATTACK);
+                int32 holy = caster->SpellBaseDamageBonusDone(SPELL_SCHOOL_MASK_HOLY);
+                holy += GetHitUnit()->SpellBaseDamageBonusTaken(SPELL_SCHOOL_MASK_HOLY);
 
                 // some seals have SPELL_AURA_DUMMY in EFFECT_2
-                Unit::AuraEffectList const& auras = GetCaster()->GetAuraEffectsByType(SPELL_AURA_DUMMY);
+                Unit::AuraEffectList const& auras = caster->GetAuraEffectsByType(SPELL_AURA_DUMMY);
                 for (Unit::AuraEffectList::const_iterator i = auras.begin(); i != auras.end(); ++i)
                 {
                     if ((*i)->GetSpellInfo()->GetSpellSpecific() == SPELL_SPECIFIC_SEAL && (*i)->GetEffIndex() == EFFECT_2)
+                    {
                         if (sSpellMgr->GetSpellInfo((*i)->GetAmount()))
                         {
                             spellId = (*i)->GetAmount();
                             break;
                         }
+                    }
                 }
 
-                GetCaster()->CastSpell(GetHitUnit(), spellId, true);
+                if (caster->HasAura(SPELL_PALADIN_SEAL_OF_RIGHTEOUSNESS))
+                    bp = 1 + int32(ap * 0.2f + 0.32f * holy);
+                else if (caster->HasAura(SPELL_PALADIN_SEAL_OF_TRUTH))
+                    bp = 1 + int32(ap * 0.142f + 0.223f * holy);
+                else
+                    bp = 1 + int32(ap * 0.16f + 0.25f * holy);
+
+                caster->CastCustomSpell(spellId, SPELLVALUE_BASE_POINT0, bp, GetHitUnit(), true, nullptr);
             }
 
             void Register() override
