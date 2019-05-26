@@ -2,9 +2,11 @@
 UPDATE `creature_template` SET `flags_extra`=`flags_extra`|128 WHERE `entry` IN (21394,21930, 21942, 21944, 21935);
 UPDATE `creature_template_addon` SET `auras`="33356" WHERE `entry` IN (21930);
 
+/*
 DELETE FROM `creature_template_movement` WHERE `CreatureId` IN (21394,21930, 21942, 21944, 21935);
 INSERT INTO `creature_template_movement` (`CreatureId`, `Ground`, `Swim`, `Flight`, `Rooted`) VALUES
 (21394,0,0,1,0),(21930,0,0,1,0),(21942,0,0,1,0),(21944,0,0,1,0),(21935,0,0,1,0);
+*/
 
 DELETE FROM `spell_target_position` WHERE `ID` IN(37908,24831,36801);
 INSERT INTO `spell_target_position` (`ID`, `EffectIndex`, `MapID`, `PositionX`, `PositionY`, `PositionZ`, `Orientation`) VALUES 

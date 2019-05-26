@@ -6,9 +6,11 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 (106802, 21934, 548, 3607, 0, 1, 1, 0, 0, -239.7149, -366.4398, -0.7445137, 1.239184, 7200, 0, 0, 0, 0, 0, 0, 0, 0, 15595); -- 21934 (Area: 0 - Difficulty: 0) (Auras: 37935 - 37935)
 UPDATE `creature` SET `position_x`=-239.8427, `position_y`=-366.4942, `position_z`=-0.7445897, `orientation`=1.22173 WHERE `id`=21216; 
 
+/*
 DELETE FROM `creature_template_movement` WHERE `CreatureId` IN (21933);
 INSERT INTO `creature_template_movement` (`CreatureId`, `Ground`, `Swim`, `Flight`, `Rooted`) VALUES
 (21933,0,0,1,0);
+*/
 
 DELETE FROM `creature_template_addon` WHERE `entry` IN (21934);
 INSERT INTO `creature_template_addon` (`entry`, `auras`, `bytes1`,`bytes2`) VALUES

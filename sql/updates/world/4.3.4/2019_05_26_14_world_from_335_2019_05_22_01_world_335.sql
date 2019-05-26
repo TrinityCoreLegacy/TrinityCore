@@ -1,3 +1,4 @@
+/*
 -- 
 UPDATE `spell_target_position` SET `positionX`=-1350.881714, `positionY`=-2739.897705, `positionZ`=61.57 WHERE `id`=9055;
 UPDATE `gameobject_template` SET `AIName`='SmartGameObjectAI' WHERE `entry` IN (103661,174764);
@@ -16,3 +17,4 @@ INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry
 DELETE FROM `creature` WHERE `guid` IN (105530)  AND `id`=15214;
 INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `VerifiedBuild`) VALUES
 (105530, 15214, 0, 0, 0, 1, 1, 0, 0, -1350.881714, -2739.897705, 61.57, 1.65806, 300, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+*/
