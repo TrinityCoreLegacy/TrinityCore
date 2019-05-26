@@ -274,10 +274,10 @@ class TC_GAME_API SmartGameObjectAI : public GameObjectAI
         void SpellHit(Unit* unit, SpellInfo const* spellInfo) override;
 
         // Called when the gameobject summon successfully other creature
-        void JustSummoned(Creature* creature) override;
+        void JustSummoned(Creature* creature);
 
         // Called when a summoned creature dissapears (UnSommoned)
-        void SummonedCreatureDespawn(Creature* unit) override;
+        void SummonedCreatureDespawn(Creature* unit);
 
         void SetGossipReturn(bool val) { _gossipReturn = val; }
 
