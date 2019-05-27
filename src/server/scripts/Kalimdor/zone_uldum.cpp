@@ -33,68 +33,46 @@ enum SummonSchnottz
 };
 
 // 88107 - Gobbles Initialize
-class spell_gobbles_initialize : public SpellScriptLoader
+class spell_gobbles_initialize : public SpellScript
 {
-public:
-    spell_gobbles_initialize() : SpellScriptLoader("spell_gobbles_initialize") { }
+    PrepareSpellScript(spell_gobbles_initialize);
 
-    class spell_gobbles_initialize_SpellScript : public SpellScript
+    void HandleScript(SpellEffIndex /*eff*/)
     {
-        PrepareSpellScript(spell_gobbles_initialize_SpellScript);
-
-        void HandleScript(SpellEffIndex /*eff*/)
+        if (Player* player = GetHitUnit()->ToPlayer())
         {
-            if (Player* player = GetHitUnit()->ToPlayer())
-            {
-                // Does not work correctly if done in db
-                player->CastSpell(player, SPELL_SUMMON_SCHNOTTZ_00);
-                player->CastSpell(player, SPELL_SUMMON_VEVAH);
-                player->CastSpell(player, SPELL_PHASE_PLAYER);
-            }
+            // Does not work correctly if done in db
+            player->CastSpell(player, SPELL_SUMMON_SCHNOTTZ_00);
+            player->CastSpell(player, SPELL_SUMMON_VEVAH);
+            player->CastSpell(player, SPELL_PHASE_PLAYER);
         }
+    }
 
-        void Register() override
-        {
-            OnEffectHitTarget += SpellEffectFn(spell_gobbles_initialize_SpellScript::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
-        }
-    };
-
-    SpellScript* GetSpellScript() const override
+    void Register() override
     {
-        return new spell_gobbles_initialize_SpellScript();
+        OnEffectHitTarget += SpellEffectFn(spell_gobbles_initialize::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
     }
 };
 
 // 88108 - Summon Schnottz
-class spell_summon_schnottz : public SpellScriptLoader
+class spell_summon_schnottz : public SpellScript
 {
-public:
-    spell_summon_schnottz() : SpellScriptLoader("spell_summon_schnottz") { }
+    PrepareSpellScript(spell_summon_schnottz);
 
-    class spell_summon_schnottz_SpellScript : public SpellScript
+    void SetDest(SpellDestination& dest)
     {
-        PrepareSpellScript(spell_summon_schnottz_SpellScript);
+        if (Creature * Schnottz = GetCaster()->FindNearestCreature(NPC_SCHNOTTZ, 10.0f, true))
+            dest.Relocate(Schnottz->GetPosition());
+    }
 
-        void SetDest(SpellDestination& dest)
-        {
-            if (Creature * Schnottz = GetCaster()->FindNearestCreature(NPC_SCHNOTTZ, 10.0f, true))
-                dest.Relocate(Schnottz->GetPosition());
-        }
-
-        void Register() override
-        {
-            OnDestinationTargetSelect += SpellDestinationTargetSelectFn(spell_summon_schnottz_SpellScript::SetDest, EFFECT_0, TARGET_DEST_NEARBY_ENTRY);
-        }
-    };
-
-    SpellScript* GetSpellScript() const override
+    void Register() override
     {
-        return new spell_summon_schnottz_SpellScript();
+        OnDestinationTargetSelect += SpellDestinationTargetSelectFn(spell_summon_schnottz::SetDest, EFFECT_0, TARGET_DEST_NEARBY_ENTRY);
     }
 };
 
 void AddSC_uldum()
 {
-    new spell_gobbles_initialize();
-    new spell_summon_schnottz();
+    RegisterSpellScript(spell_gobbles_initialize);
+    RegisterSpellScript(spell_summon_schnottz);
 }
