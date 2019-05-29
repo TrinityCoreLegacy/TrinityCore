@@ -177,7 +177,7 @@ class spell_dru_eclipse_energize : public SpellScriptLoader
         {
             PrepareSpellScript(spell_dru_eclipse_energize_SpellScript);
 
-            int32 energizeAmount;
+            int32 energizeAmount = 0;
 
             bool Load() override
             {
