@@ -740,6 +740,7 @@ struct SmartAction
         {
             uint32 spell;
             uint32 charges;
+            uint32 onlyOwnedAuras;
         } removeAura;
 
         struct
