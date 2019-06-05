@@ -1,3 +1,4 @@
+/*
 -- 
 UPDATE `creature_template` SET `faction`=15, `MovementType`=2 WHERE `entry`=15571;
 DELETE FROM `creature_template_addon` WHERE `entry`=15571;
@@ -50,3 +51,4 @@ INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type
 DELETE FROM `conditions` WHERE `SourceEntry`=25783 AND `SourceTypeOrReferenceId`=17;
 INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `SourceId`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionTarget`, `ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `NegativeCondition`, `ErrorType`, `ErrorTextId`, `Comment`) VALUES
 (17,0,25783,0,0,29,0,15571,100,0,1,0,0,'Place Arcanite Buoy cannot be used if Maws is spawned');
+*/

@@ -4,6 +4,7 @@ UPDATE `creature_template` SET `unit_flags`=33554432, `VehicleId`=311, `AIName`=
 UPDATE `creature_template` SET `unit_flags`=768, `AIName`="SmartAI" WHERE `entry` IN (32576, 32577, 32578, 32579, 32580);
 UPDATE `creature_template` SET `flags_extra`=`flags_extra`|64 WHERE `entry` IN (32577, 32578, 32579, 32580);
 
+/*
 DELETE FROM `creature_template_movement` WHERE `CreatureId` IN (27939, 32576, 32577, 32578, 32579, 32580);
 INSERT INTO `creature_template_movement` (`CreatureId`, `Ground`, `Flight`) VALUES
 (27939, 0, 1),
@@ -12,6 +13,7 @@ INSERT INTO `creature_template_movement` (`CreatureId`, `Ground`, `Flight`) VALU
 (32578, 1, 0),
 (32579, 1, 0),
 (32580, 1, 0);
+*/
 
 DELETE FROM `npc_spellclick_spells` WHERE `npc_entry`=27939;
 INSERT INTO `npc_spellclick_spells` (`npc_entry`, `spell_id`, `cast_flags`, `user_type`) VALUES

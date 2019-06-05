@@ -1,3 +1,4 @@
+/*
 -- 
 DELETE FROM `smart_scripts` WHERE `entryorguid`=6176 AND `source_type`=0;
 DELETE FROM `smart_scripts` WHERE `entryorguid` IN (617600,617601) AND `source_type`=9;
@@ -46,3 +47,4 @@ DELETE FROM `waypoints` WHERE `entry`=61761;
 INSERT INTO `waypoints` (`entry`, `pointid`, `position_x`, `position_y`, `position_z`, `point_comment`) VALUES
 (61761,1,254.741,-1452.16,51.6124,""),
 (61761,2,250.84,-1470.58,55.4491,"");
+*/

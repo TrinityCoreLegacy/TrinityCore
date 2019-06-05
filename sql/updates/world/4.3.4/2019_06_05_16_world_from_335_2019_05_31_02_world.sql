@@ -369,10 +369,12 @@ INSERT INTO `creature_addon` (`guid`,`mount`,`bytes1`,`bytes2`,`auras`) VALUES
 (106767,0,0,1,"43085"),
 (106842,0,0,1,"43085");
 -- Winterskorn Raider 23665
+/*
 DELETE FROM `creature_movement_override` WHERE `SpawnId` IN (106339, 106340);
 INSERT INTO `creature_movement_override` (`SpawnId`, `Ground`, `Swim`, `Flight`, `Rooted`) VALUES
 (106339, 1, 1, 2, 0),
 (106340, 1, 1, 2, 0);
+*/
 -- Winterskorn Warrior 23664
 UPDATE `creature` SET `position_x` = 1901.188965, `position_y` = -4158.089844, `position_z` = 215.036270, `orientation` = 0.493954 WHERE `guid` = 106286;
 UPDATE `creature` SET `position_x` = 1913.361938, `position_y` = -4035.461182, `position_z` = 215.914795, `spawndist` = 2, `MovementType` = 1 WHERE `guid` = 106283;

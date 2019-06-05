@@ -1,5 +1,5 @@
 -- 
-UPDATE `spell_dbc` SET `Effect2` = 28, `EffectMiscValueB2` = 64, `EffectImplicitTargetA1`=48 WHERE `Id`IN (21883);
+UPDATE `spelleffect_dbc` SET `Effect` = 28, `EffectMiscValueB` = 64, `EffectImplicitTargetA`=48 WHERE `EffectSpellId`IN (21883);
 UPDATE `gameobject_template` SET `AIName`="" WHERE `entry`=178905;
 DELETE FROM `smart_scripts` WHERE `entryorguid`=178905 AND `source_type`=1;
 DELETE FROM `smart_scripts` WHERE `entryorguid`=13696 AND `source_type`=0;
