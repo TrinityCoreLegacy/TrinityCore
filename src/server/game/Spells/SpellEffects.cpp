@@ -641,6 +641,12 @@ void Spell::EffectTriggerSpell(SpellEffIndex effIndex)
         }
     }
 
+    if (triggered_spell_id == 0)
+    {
+        TC_LOG_WARN("spells.effect.nospell", "Spell::EffectTriggerSpell: Spell %u [EffectIndex: %u] does not have triggered spell.", m_spellInfo->Id, effIndex);
+        return;
+    }
+
     // normal case
     SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(triggered_spell_id);
     if (!spellInfo)
@@ -690,6 +696,11 @@ void Spell::EffectTriggerMissileSpell(SpellEffIndex effIndex)
         return;
 
     uint32 triggered_spell_id = m_spellInfo->Effects[effIndex].TriggerSpell;
+    if (triggered_spell_id == 0)
+    {
+        TC_LOG_WARN("spells.effect.nospell", "Spell::EffectTriggerMissileSpell: Spell %u [EffectIndex: %u] does not have triggered spell.", m_spellInfo->Id, effIndex);
+        return;
+    }
 
     // normal case
     SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(triggered_spell_id);
@@ -740,6 +751,11 @@ void Spell::EffectForceCast(SpellEffIndex effIndex)
         return;
 
     uint32 triggered_spell_id = m_spellInfo->Effects[effIndex].TriggerSpell;
+    if (triggered_spell_id == 0)
+    {
+        TC_LOG_WARN("spells.effect.nospell", "Spell::EffectForceCast: Spell %u [EffectIndex: %u] does not have triggered spell.", m_spellInfo->Id, effIndex);
+        return;
+    }
 
     // normal case
     SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(triggered_spell_id);
@@ -794,6 +810,12 @@ void Spell::EffectTriggerRitualOfSummoning(SpellEffIndex effIndex)
         return;
 
     uint32 triggered_spell_id = m_spellInfo->Effects[effIndex].TriggerSpell;
+    if (triggered_spell_id == 0)
+    {
+        TC_LOG_WARN("spells.effect.nospell", "Spell::EffectTriggerRitualOfSummoning: Spell %u [EffectIndex: %u] does not have triggered spell.", m_spellInfo->Id, effIndex);
+        return;
+    }
+
     SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(triggered_spell_id);
 
     if (!spellInfo)
