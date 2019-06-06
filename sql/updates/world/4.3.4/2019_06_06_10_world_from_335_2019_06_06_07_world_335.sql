@@ -1,3 +1,4 @@
+/*
 -- 
 DELETE FROM `creature` WHERE `id`  IN (23488) AND `guid` IN (109935, 109988, 109997, 109998, 110004, 110005);
 INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `VerifiedBuild`) VALUES
@@ -11,3 +12,4 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 DELETE FROM `game_event_creature` WHERE `guid` IN (109935, 109988, 109997, 109998, 110004, 110005) AND `eventEntry`=24;
 INSERT INTO `game_event_creature` (`eventEntry`,`guid`) VALUES
 (24,109935),(24,109988),(24,109997),(24,109998),(24,110004),(24,110005);
+*/

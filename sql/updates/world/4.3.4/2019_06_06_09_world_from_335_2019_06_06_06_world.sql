@@ -26,6 +26,8 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`,  `equipme
 (109917, 23444, 530, 1, 1, 0, 4023.53, 5889.88, 272.276, 5.44543, 300, 0, 0),
 (109918, 23444, 530, 1, 1, 0, 4025.63, 5901.54, 276.751, 4.34587, 300, 0, 0);
 
+/*
 DELETE FROM `creature_template_movement` WHERE `CreatureId`=23444;
 INSERT INTO `creature_template_movement` (`CreatureID`, `Ground`, `Swim`, `Flight`, `Rooted`) VALUES
 (23444,0,0,1,0);
+*/

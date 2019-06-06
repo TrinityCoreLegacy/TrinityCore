@@ -11,7 +11,7 @@ UPDATE `creature_template_addon` SET `auras`="36637 36600 36287" WHERE  `entry`I
 DELETE FROM `creature_template_addon` WHERE `entry`=21585;
 INSERT INTO `creature_template_addon` (`entry`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES
 (21585,0,0,4098,333, "38805 38803 40448");
-UPDATE `spell_dbc` SET `ProcFlags`=20, `ProcChance`=75, `Effect1`=6, `EffectImplicitTargetA1`=1, `EffectApplyAuraName1`=42, `EffectTriggerSpell1`=40449, `DmgClass`=1, `PreventionType`=1, `DmgMultiplier1`=1 WHERE `id`=40448;
+-- UPDATE `spell_dbc` SET `ProcFlags`=20, `ProcChance`=75, `Effect1`=6, `EffectImplicitTargetA1`=1, `EffectApplyAuraName1`=42, `EffectTriggerSpell1`=40449, `DmgClass`=1, `PreventionType`=1, `DmgMultiplier1`=1 WHERE `id`=40448;
 UPDATE `creature_template_addon` SET `auras`="36610" WHERE  `entry`IN (20859);
 DELETE FROM `creature_template_addon` WHERE `entry`=21587;
 INSERT INTO `creature_template_addon` (`entry`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES
