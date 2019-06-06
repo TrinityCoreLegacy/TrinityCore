@@ -1970,7 +1970,9 @@ INSERT INTO `updates` VALUES
 ('2018_10_15_00_auth.sql','52B47D3D881D2FCD2FBAEB0066C39AC4ED778CED','ARCHIVED','2018-09-17 01:40:04',0),
 ('2018_12_15_00_auth.sql','6974CDB8E36DB73CAAB79BFAB4114C0B6706573C','ARCHIVED','2018-12-15 01:40:04',0),
 ('2019_05_10_00_auth.sql','84B1EB9CC9B09BAF55E6295D202EC57D99B1B60E','ARCHIVED','2019-05-10 01:40:04',0),
-('2019_05_15_00_auth.sql','2A37680AD70F6C200592C8DF5EFAD37878874CCF','ARCHIVED','2019-05-15 01:40:04',0);
+('2019_05_15_00_auth.sql','2A37680AD70F6C200592C8DF5EFAD37878874CCF','ARCHIVED','2019-05-15 01:40:04',0),
+('2019_06_06_00_auth.sql','6DE8159E04BEE7BA0A4A81D72D160EB74934B6A5','ARCHIVED','2019-05-15 01:40:04',0);
+
 /*!40000 ALTER TABLE `updates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2023,6 +2025,43 @@ LOCK TABLES `uptime` WRITE;
 /*!40000 ALTER TABLE `uptime` DISABLE KEYS */;
 /*!40000 ALTER TABLE `uptime` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `vw_log_history`
+--
+
+DROP TABLE IF EXISTS `vw_log_history`;
+/*!50001 DROP VIEW IF EXISTS `vw_log_history`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vw_log_history` AS SELECT 
+ 1 AS `First Logged`,
+ 1 AS `Last Logged`,
+ 1 AS `Occurrences`,
+ 1 AS `Realm`,
+ 1 AS `type`,
+ 1 AS `level`,
+ 1 AS `string`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `vw_log_history`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_log_history`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 */
+/*!50001 VIEW `vw_log_history` AS (select from_unixtime(min(`logs`.`time`)) AS `First Logged`,from_unixtime(max(`logs`.`time`)) AS `Last Logged`,count(0) AS `Occurrences`,`realmlist`.`name` AS `Realm`,`logs`.`type` AS `type`,`logs`.`level` AS `level`,`logs`.`string` AS `string` from (`logs` left join `realmlist` on((`logs`.`realm` = `realmlist`.`id`))) group by `logs`.`string`,`logs`.`type`,`logs`.`realm`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
