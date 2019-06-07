@@ -323,6 +323,7 @@ CREATE TABLE `creature_addon` (
   `aiAnimKit` smallint(6) NOT NULL DEFAULT '0',
   `movementAnimKit` smallint(6) NOT NULL DEFAULT '0',
   `meleeAnimKit` smallint(6) NOT NULL DEFAULT '0',
+  `visibilityDistanceType` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `auras` text,
   PRIMARY KEY (`guid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -628,6 +629,7 @@ CREATE TABLE `creature_template_addon` (
   `aiAnimKit` smallint(6) NOT NULL DEFAULT '0',
   `movementAnimKit` smallint(6) NOT NULL DEFAULT '0',
   `meleeAnimKit` smallint(6) NOT NULL DEFAULT '0',
+  `visibilityDistanceType` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `auras` text,
   PRIMARY KEY (`entry`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
