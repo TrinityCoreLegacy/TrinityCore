@@ -130,7 +130,36 @@ public:
     }
 };
 
+/*######
+##Quest 14159 - The Rebel Lord's Arsenal
+######*/
+
+enum SummonJosiah
+{
+    SPELL_WORGEN_BITE                            = 72870,
+    SPELL_GENERIC_QUEST_INVISIBILITY_DETECTION_1 = 49416
+};
+
+// 67350 Summon Josiah
+class spell_summon_josiah : public SpellScript
+{
+    PrepareSpellScript(spell_summon_josiah);
+
+    void HandleSendEvent(SpellEffIndex /*effIndex*/)
+    {
+        Unit* caster = GetCaster();
+        caster->CastSpell(caster, SPELL_WORGEN_BITE, true);
+        caster->CastSpell(caster, SPELL_GENERIC_QUEST_INVISIBILITY_DETECTION_1, true);
+    }
+
+    void Register() override
+    {
+        OnEffectHit += SpellEffectFn(spell_summon_josiah::HandleSendEvent, EFFECT_1, SPELL_EFFECT_SEND_EVENT);
+    }
+};
+
 void AddSC_gilneas_c1()
 {
     new npc_frightened_citizen();
+    RegisterSpellScript(spell_summon_josiah);
 }
