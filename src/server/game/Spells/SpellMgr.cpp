@@ -3369,6 +3369,11 @@ void SpellMgr::LoadSpellInfoCorrections()
         spellInfo->AttributesEx2 |= SPELL_ATTR2_CANT_CRIT;
     });
 
+    ApplySpellFix({ 69123 }, [](SpellInfo* spellInfo)
+    {
+        spellInfo->RangeEntry = sSpellRangeStore.LookupEntry(135); // Tower 100
+    });
+
     ApplySpellFix({
         51597, // Summon Scourged Captive
         56606, // Ride Jokkum
@@ -3378,7 +3383,7 @@ void SpellMgr::LoadSpellInfoCorrections()
         /// @todo: remove this when basepoints of all Ride Vehicle auras are calculated correctly
         spellInfo->Effects[EFFECT_0].BasePoints = 1;
     });
-    
+
     // Summon Scourged Captive
     ApplySpellFix({ 51597 }, [](SpellInfo* spellInfo)
     {
