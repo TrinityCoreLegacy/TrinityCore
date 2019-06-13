@@ -1,3 +1,4 @@
+/*
 -- 
 UPDATE `creature` SET `orientation`=5.448936 WHERE `id`=10638;
 DELETE FROM `script_waypoint` WHERE `entry` =10638;
@@ -34,3 +35,4 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 DELETE FROM `creature_template_addon` WHERE `entry`=10720;
 INSERT INTO `creature_template_addon` (`entry`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES
 (10720,0,0,1,0, "3616");
+*/

@@ -1,3 +1,4 @@
+/*
 --
 UPDATE `spell_dbc` SET `ProcChance`=101, `Effect1`=6, `Effect2`=6, `Effect3`=6, `EffectImplicitTargetA1`=25, `EffectImplicitTargetA2`=25, `EffectImplicitTargetA3`=25, `EffectApplyAuraName1`=56, `EffectApplyAuraName2`=67, `EffectApplyAuraName3`=23, `EffectAmplitude3`=5000, `EffectMiscValue1`=15214, `DmgMultiplier1`=1, `DmgMultiplier2`=1, `DmgMultiplier3`=1 WHERE `Id`=42825;
 DELETE  FROM `spell_target_position` WHERE `ID` IN (24831, 42826, 24730);
@@ -46,3 +47,4 @@ DELETE FROM `creature` WHERE `guid` IN (111084,111094);
 INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `VerifiedBuild`) VALUES
 (111084, 15218, 0, 0, 0, 1, 1, 0, 0, -9570.283, -9.950684, 63.51959, 6.126106, 7200, 0, 0, 0, 0, 0, 0, 0, 0, 12340), 
 (111094, 15218, 530, 0, 0, 1, 1, 0, 0, -1742.180, 5457.9300, -12.3448, 1.413720, 7200, 0, 0, 0, 0, 0, 0, 0, 0, 12340);
+*/
