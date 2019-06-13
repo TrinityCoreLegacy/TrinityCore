@@ -70,6 +70,7 @@ void AddSC_instance_blackwing_lair();
 void AddSC_instance_deadmines();             //Deadmines
 void AddSC_boss_mr_smite();
 void AddSC_gilneas_c1();                     //Gilneas
+void AddSC_gilneas_c2();
 void AddSC_gnomeregan();                     //Gnomeregan
 void AddSC_instance_gnomeregan();
 void AddSC_boss_attumen();                   //Karazhan
@@ -261,6 +262,7 @@ void AddEasternKingdomsScripts()
     AddSC_instance_deadmines();             //Deadmines
     AddSC_boss_mr_smite();
     AddSC_gilneas_c1();                     //Gilneas
+    AddSC_gilneas_c2();
     AddSC_gnomeregan();                     //Gnomeregan
     AddSC_instance_gnomeregan();
     AddSC_boss_attumen();                   //Karazhan
