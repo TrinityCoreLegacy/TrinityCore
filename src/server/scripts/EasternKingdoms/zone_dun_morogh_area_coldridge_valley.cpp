@@ -115,85 +115,6 @@ public:
     }
 };
 
-/*####
-## npc_wounded_milita
-####*/
-
-enum WoundedMilita
-{
-    QUEST_KILL_CREDIT  = 44175,
-    SPELL_FLASH_HEAL   = 2061,
-    EVENT_RESET_HEALTH = 4
-};
-
-class npc_wounded_milita : public CreatureScript
-{
-public:
-    npc_wounded_milita() : CreatureScript("npc_wounded_milita") { }
-
-    struct npc_wounded_militaAI : public ScriptedAI
-    {
-        npc_wounded_militaAI(Creature* creature) : ScriptedAI(creature)
-        {
-            Initialize();
-        }
-
-        void Initialize()
-        {
-            _hitBySpell = false;
-            _percentHP = urand(15, 55);
-        }
-
-        void Reset() override
-        {
-            Initialize();
-            me->SetHealth(me->CountPctFromMaxHealth(_percentHP));
-        }
-
-        void SpellHit(Unit* caster, SpellInfo const* spell) override
-        {
-            if (!_hitBySpell)
-            {
-                _hitBySpell = true;
-                _events.ScheduleEvent(EVENT_RESET_HEALTH, Seconds(30));
-            }
-            if (spell->Id == SPELL_FLASH_HEAL)
-                if (Player* player = caster->ToPlayer())
-                    player->KilledMonsterCredit(QUEST_KILL_CREDIT);
-        }
-
-        void UpdateAI(uint32 diff) override
-        {
-            if (!_hitBySpell)
-                return;
-
-            _events.Update(diff);
-
-            while (uint32 eventId = _events.ExecuteEvent())
-            {
-                switch (eventId)
-                {
-                    case EVENT_RESET_HEALTH:
-                        me->SetHealth(me->CountPctFromMaxHealth(_percentHP));
-                        _hitBySpell = false;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    private:
-        EventMap _events;
-        int8 _percentHP;
-        bool _hitBySpell;
-    };
-
-    CreatureAI* GetAI(Creature* creature) const override
-    {
-        return new npc_wounded_militaAI(creature);
-    }
-};
-
 /*######
 ## npc_milos_gyro
 ######*/
@@ -463,7 +384,6 @@ public:
 void AddSC_dun_morogh_area_coldridge_valley()
 {
     new npc_wounded_coldridge_mountaineer();
-    new npc_wounded_milita();
     new npc_milos_gyro();
     new spell_a_trip_to_ironforge_quest_complete();
     new spell_follow_that_gyrocopter_quest_start();

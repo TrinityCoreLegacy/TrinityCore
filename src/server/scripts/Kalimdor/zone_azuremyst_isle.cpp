@@ -26,7 +26,6 @@ EndScriptData */
 /* ContentData
 npc_draenei_survivor
 npc_engineer_spark_overgrind
-npc_injured_draenei
 npc_magwin
 go_ravager_cage
 npc_death_ravager
@@ -275,48 +274,6 @@ public:
     CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_engineer_spark_overgrindAI(creature);
-    }
-};
-
-/*######
-## npc_injured_draenei
-######*/
-
-class npc_injured_draenei : public CreatureScript
-{
-public:
-    npc_injured_draenei() : CreatureScript("npc_injured_draenei") { }
-
-    struct npc_injured_draeneiAI : public ScriptedAI
-    {
-        npc_injured_draeneiAI(Creature* creature) : ScriptedAI(creature) { }
-
-        void Reset() override
-        {
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IN_COMBAT);
-            me->SetHealth(me->CountPctFromMaxHealth(15));
-            switch (urand(0, 1))
-            {
-                case 0:
-                    me->SetStandState(UNIT_STAND_STATE_SIT);
-                    break;
-
-                case 1:
-                    me->SetStandState(UNIT_STAND_STATE_SLEEP);
-                    break;
-            }
-        }
-
-        void JustEngagedWith(Unit* /*who*/) override { }
-
-        void MoveInLineOfSight(Unit* /*who*/) override { }
-
-        void UpdateAI(uint32 /*diff*/) override { }
-    };
-
-    CreatureAI* GetAI(Creature* creature) const override
-    {
-        return new npc_injured_draeneiAI(creature);
     }
 };
 
@@ -721,7 +678,6 @@ void AddSC_azuremyst_isle()
 {
     new npc_draenei_survivor();
     new npc_engineer_spark_overgrind();
-    new npc_injured_draenei();
     new npc_magwin();
     new npc_death_ravager();
     new go_ravager_cage();
