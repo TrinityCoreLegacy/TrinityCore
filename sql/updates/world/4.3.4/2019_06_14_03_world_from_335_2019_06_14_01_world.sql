@@ -7,10 +7,12 @@ INSERT INTO disables (sourceType, entry, flags, COMMENT) VALUES
 -- The Battle of Alterac and The Battle for Alterac have no prequest
 UPDATE `quest_template_addon` SET `NextQuestId`=0 WHERE `ID` IN (7221, 7222);
 
+/*
 -- In Defense of Frostwolf is a breadcrumb to Proving Grounds
 UPDATE `quest_template_addon` SET `BreadcrumbForQuestId`=7161 WHERE `ID`=7241;
 -- The Sovereign Imperative is a breadcrumb to Proving Grounds
 UPDATE `quest_template_addon` SET `BreadcrumbForQuestId`=7162 WHERE `ID`=7261;
+*/
 
 UPDATE `quest_request_items` SET `CompletionText`="<Warmaster Laggrond salutes you.>$B$BIt is your time, $N. You have done much for the Frostwolf Clan and in doing so, earned a place as not only a soldier of Frostwolf but also as a friend.$B$BWell done! Present your initiate's insignia." WHERE `ID`=7163;
 UPDATE `quest_request_items` SET `CompletionText`="It is good to see you again, $C. I had not expected you to return. Alas, you have proven yourself a brave and honorable soldier of the Frostwolf.$B$BYour time has come again, $N. You have earned a new ranking and as such, a new insignia denoting this rise in stature.$B$BPresent your insignia." WHERE `ID`=7164;
