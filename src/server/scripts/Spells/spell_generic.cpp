@@ -2828,6 +2828,11 @@ class spell_gen_pet_summoned : public SpellScriptLoader
         }
 };
 
+enum ProfessionResearch
+{
+    SPELL_NORTHREND_INSCRIPTION_RESEARCH = 61177
+};
+
 class spell_gen_profession_research : public SpellScriptLoader
 {
     public:
@@ -2844,7 +2849,9 @@ class spell_gen_profession_research : public SpellScriptLoader
 
             SpellCastResult CheckRequirement()
             {
-                if (HasDiscoveredAllSpells(GetSpellInfo()->Id, GetCaster()->ToPlayer()))
+                Player* player = GetCaster()->ToPlayer();
+
+                if (HasDiscoveredAllSpells(GetSpellInfo()->Id, player))
                 {
                     SetCustomCastResultMessage(SPELL_CUSTOM_ERROR_NOTHING_TO_DISCOVER);
                     return SPELL_FAILED_CUSTOM_ERROR;
@@ -2858,11 +2865,15 @@ class spell_gen_profession_research : public SpellScriptLoader
                 Player* caster = GetCaster()->ToPlayer();
                 uint32 spellId = GetSpellInfo()->Id;
 
-                // learn random explicit discovery recipe (if any)
+                // Learn random explicit discovery recipe (if any)
+                // Players will now learn 3 recipes the very first time they perform Northrend Inscription Research (3.3.0 patch notes)
+                if (spellId == SPELL_NORTHREND_INSCRIPTION_RESEARCH && !HasDiscoveredAnySpell(spellId, caster))
+                    for (int i = 0; i < 2; ++i)
+                        if (uint32 discoveredSpellId = GetExplicitDiscoverySpell(spellId, caster))
+                            caster->LearnSpell(discoveredSpellId, false);
+
                 if (uint32 discoveredSpellId = GetExplicitDiscoverySpell(spellId, caster))
                     caster->LearnSpell(discoveredSpellId, false);
-
-                caster->UpdateCraftSkill(spellId);
             }
 
             void Register() override
