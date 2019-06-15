@@ -3011,7 +3011,8 @@ void SpellMgr::LoadSpellInfoCorrections()
         53609, // Summon Anub'ar Assassin (Force Cast)
         53457, // Summon Impale Trigger (AoE)
         58121, // Torch
-        43109  // Throw Torch
+        43109, // Throw Torch
+        68591  // Fiery Boulder
     }, [](SpellInfo* spellInfo)
     {
         spellInfo->MaxAffectedTargets = 1;
