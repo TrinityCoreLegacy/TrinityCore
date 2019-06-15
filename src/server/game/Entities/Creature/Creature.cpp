@@ -2857,6 +2857,10 @@ void Creature::FocusTarget(Spell const* focusSpell, WorldObject const* target)
     if (m_focusSpell)
         return;
 
+    // Prevent dead creatures from setting a focus target, so they won't turn
+    if (!IsAlive())
+        return;
+
     SpellInfo const* spellInfo = focusSpell->GetSpellInfo();
 
     // don't use spell focus for vehicle spells
