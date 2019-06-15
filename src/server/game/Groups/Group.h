@@ -24,6 +24,7 @@
 #include "GroupRefManager.h"
 #include "Loot.h"
 #include "SharedDefines.h"
+#include "Timer.h"
 #include <map>
 
 class Battlefield;
@@ -189,6 +190,8 @@ class TC_GAME_API Group
         Group();
         ~Group();
 
+        void Update(uint32 diff);
+
         // group manipulation methods
         bool   Create(Player* leader);
         void   LoadGroupFromDB(Field* field);
@@ -349,6 +352,10 @@ class TC_GAME_API Group
         InstanceGroupBind* GetBoundInstance(Difficulty difficulty, uint32 mapId);
         BoundInstancesMap& GetBoundInstances(Difficulty difficulty);
 
+        void StartLeaderOfflineTimer();
+        void StopLeaderOfflineTimer();
+        void SelectNewPartyOrRaidLeader();
+
         // FG: evil hacks
         void BroadcastGroupUpdate(void);
 
@@ -386,6 +393,8 @@ class TC_GAME_API Group
         uint32              m_counter;                      // used only in SMSG_GROUP_LIST
         uint32              m_maxEnchantingLevel;
         uint32              m_dbStoreId;                    // Represents the ID used in database (Can be reused by other groups if group was disbanded)
+        bool                m_isLeaderOffline;
+        TimeTrackerSmall    m_leaderOfflineTimer;
 
         typedef std::list<DynamicObject*> DynObjectList;
         DynObjectList m_dynObj;

@@ -970,6 +970,8 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
         group->SendUpdate();
         group->SendRaidMarkerUpdateToPlayer(playerGuid);
         group->ResetMaxEnchantingLevel();
+        if (group->GetLeaderGUID() == pCurrChar->GetGUID())
+            group->StopLeaderOfflineTimer();
     }
 
     // friend status
