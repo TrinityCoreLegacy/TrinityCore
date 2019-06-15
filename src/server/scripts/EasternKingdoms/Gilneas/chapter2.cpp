@@ -27,6 +27,39 @@
 #include "World.h"
 
 /*######
+## Duskhaven Villager Entry: 36453
+######*/
+
+class npc_duskhaven_villager : public CreatureScript
+{
+public:
+    npc_duskhaven_villager() : CreatureScript("npc_duskhaven_villager") { }
+
+    struct npc_duskhaven_villagerAI : public ScriptedAI
+    {
+        npc_duskhaven_villagerAI(Creature* creature) : ScriptedAI(creature) { }
+
+        void Reset() override { }
+
+        void IsSummonedBy(Unit* /*summoner*/) override
+        {
+            me->GetMotionMaster()->MovePath(me->GetEntry() * 10, false);
+        }
+
+        void MovementInform(uint32 type, uint32 id) override
+        {
+            if (type == WAYPOINT_MOTION_TYPE && id == 5)
+                me->DespawnOrUnsummon();
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_duskhaven_villagerAI(creature);
+    }
+};
+
+/*######
 ##Quest 14348 - You Can't Take 'Em Alone
 ######*/
 
