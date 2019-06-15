@@ -116,6 +116,7 @@ class spell_gilneas_quest_save_ashley : public SpellScript
 
 void AddSC_gilneas_c2()
 {
+    new npc_duskhaven_villager();
     RegisterSpellScript(spell_gilneas_horrid_abomination_explosion);
     RegisterSpellScript(spell_gilneas_quest_save_james);
     RegisterSpellScript(spell_gilneas_quest_save_cynthia);
