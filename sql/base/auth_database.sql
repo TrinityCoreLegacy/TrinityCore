@@ -936,6 +936,9 @@ INSERT INTO `rbac_linked_permissions` VALUES
 (196,866),
 (196,867),
 (196,872),
+(196,875),
+(196,876),
+(196,877),
 (197,232),
 (197,236),
 (197,237),
@@ -1817,7 +1820,11 @@ INSERT INTO `rbac_permissions` VALUES
 (866,'Command: list spawnpoints'),
 (867,'Command: reload quest_greeting_locale'),
 (872,'Command: server debug'),
-(874,'Command: debug asan');
+(874,'Command: debug asan'),
+(874,'Command: debug asan'),
+(875,'Command: lookup map id'),
+(876,'Command: lookup item id'),
+(877,'Command: lookup quest id');
 /*!40000 ALTER TABLE `rbac_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1972,7 +1979,9 @@ INSERT INTO `updates` VALUES
 ('2019_05_10_00_auth.sql','84B1EB9CC9B09BAF55E6295D202EC57D99B1B60E','ARCHIVED','2019-05-10 01:40:04',0),
 ('2019_05_15_00_auth.sql','2A37680AD70F6C200592C8DF5EFAD37878874CCF','ARCHIVED','2019-05-15 01:40:04',0),
 ('2019_06_06_00_auth.sql','6DE8159E04BEE7BA0A4A81D72D160EB74934B6A5','ARCHIVED','2019-05-15 01:40:04',0),
-('2019_06_15_00_auth.sql','A48783A4B07847401DBA32BC7007770765BCC07A','ARCHIVED','2019-06-15 01:40:04',0);
+('2019_06_15_00_auth.sql','A48783A4B07847401DBA32BC7007770765BCC07A','ARCHIVED','2019-06-15 01:40:04',0),
+('2019_06_16_00_auth.sql','B14AED4D3387B56FF8C8161D3671750AEEAE0F2E','ARCHIVED','2019-06-16 01:40:04',0);
+
 
 /*!40000 ALTER TABLE `updates` ENABLE KEYS */;
 UNLOCK TABLES;
