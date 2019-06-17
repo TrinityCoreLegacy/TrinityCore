@@ -1821,7 +1821,6 @@ INSERT INTO `rbac_permissions` VALUES
 (867,'Command: reload quest_greeting_locale'),
 (872,'Command: server debug'),
 (874,'Command: debug asan'),
-(874,'Command: debug asan'),
 (875,'Command: lookup map id'),
 (876,'Command: lookup item id'),
 (877,'Command: lookup quest id');
