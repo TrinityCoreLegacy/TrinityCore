@@ -147,6 +147,15 @@ class spell_gilneas_quest_save_ashley : public SpellScript
     }
 };
 
+/*######
+## Quest 14386 Leader of the Pack
+######*/
+
+enum CallAttackMastiffs
+{
+    NPC_ATTACK_MASTIFF  = 36405
+};
+
 // 68682 Call Attack Mastiffs
 class spell_68682_call_attack_mastiffs : public SpellScript
 {
@@ -154,15 +163,15 @@ class spell_68682_call_attack_mastiffs : public SpellScript
 
     void HandleEffect(SpellEffIndex /*eff*/)
     {
-        GetCaster()->SummonCreature(36405, -1944.573f, 2657.402f, 0.994939f, 1.691919f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000);
-        GetCaster()->SummonCreature(36405, -2005.65f, 2663.526f, -2.086935f, 0.5942355f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000);
-        GetCaster()->SummonCreature(36405, -1996.506f, 2651.347f, -1.011707f, 0.8185352f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000);
-        GetCaster()->SummonCreature(36405, -1972.352f, 2640.07f, 1.080288f, 1.217854f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000);
-        GetCaster()->SummonCreature(36405, -1949.322f, 2642.76f, 1.242482f, 1.58074f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000);
-        GetCaster()->SummonCreature(36405, -1993.94f, 2672.535f, -2.322549f, 0.5766209f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000);
-        GetCaster()->SummonCreature(36405, -1982.724f, 2662.8f, -1.773986f, 0.8628055f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000);
-        GetCaster()->SummonCreature(36405, -1973.301f, 2655.475f, -0.7831049f, 1.098415f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000);
-        GetCaster()->SummonCreature(36405, -1956.509f, 2650.655f, 1.350571f, 1.441473f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000);
+        GetCaster()->SummonCreature(NPC_ATTACK_MASTIFF, -1944.573f, 2657.402f, 0.994939f, 1.691919f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000, GetCaster());
+        GetCaster()->SummonCreature(NPC_ATTACK_MASTIFF, -2005.65f, 2663.526f, -2.086935f, 0.5942355f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000, GetCaster());
+        GetCaster()->SummonCreature(NPC_ATTACK_MASTIFF, -1996.506f, 2651.347f, -1.011707f, 0.8185352f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000, GetCaster());
+        GetCaster()->SummonCreature(NPC_ATTACK_MASTIFF, -1972.352f, 2640.07f, 1.080288f, 1.217854f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000, GetCaster());
+        GetCaster()->SummonCreature(NPC_ATTACK_MASTIFF, -1949.322f, 2642.76f, 1.242482f, 1.58074f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000, GetCaster());
+        GetCaster()->SummonCreature(NPC_ATTACK_MASTIFF, -1993.94f, 2672.535f, -2.322549f, 0.5766209f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000, GetCaster());
+        GetCaster()->SummonCreature(NPC_ATTACK_MASTIFF, -1982.724f, 2662.8f, -1.773986f, 0.8628055f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000, GetCaster());
+        GetCaster()->SummonCreature(NPC_ATTACK_MASTIFF, -1973.301f, 2655.475f, -0.7831049f, 1.098415f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000, GetCaster());
+        GetCaster()->SummonCreature(NPC_ATTACK_MASTIFF, -1956.509f, 2650.655f, 1.350571f, 1.441473f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 1000, GetCaster());
     }
 
     void Register() override
