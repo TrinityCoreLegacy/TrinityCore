@@ -122,12 +122,6 @@ WayPoint* SmartAI::GetNextWayPoint()
 
 void SmartAI::StartPath(bool run, uint32 path, bool repeat, Unit* invoker)
 {
-    if (me->IsInCombat())// no wp movement in combat
-    {
-        TC_LOG_ERROR("misc", "SmartAI::StartPath: Creature entry %u wanted to start waypoint movement while in combat, ignoring.", me->GetEntry());
-        return;
-    }
-
     if (HasEscortState(SMART_ESCORT_ESCORTING))
         StopPath();
 
