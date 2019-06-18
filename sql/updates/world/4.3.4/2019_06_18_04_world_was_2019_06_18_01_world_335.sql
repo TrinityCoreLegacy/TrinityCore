@@ -1,2 +1,2 @@
 -- 
-UPDATE `gameobject_template_addon` SET `flags`=`flags`|2 WHERE `entry`=104591;
+UPDATE `gameobject_template_addon` SET `flags`=32 WHERE `entry`=104591;
