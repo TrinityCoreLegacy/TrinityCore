@@ -1281,7 +1281,6 @@ public:
 
         if (MapEntry const* mapInfo = sMapStore.LookupEntry(id))
         {
-            uint8 locale = handler->GetSession() ? handler->GetSession()->GetSessionDbcLocale() : sWorld->GetDefaultDbcLocale();
             std::string name = mapInfo->name;
             if (name.empty())
             {
