@@ -158,8 +158,33 @@ class spell_summon_josiah : public SpellScript
     }
 };
 
+// 67357 Pull-to
+class spell_gilneas_pull_to : public SpellScript
+{
+    PrepareSpellScript(spell_gilneas_pull_to);
+
+    void HandPullEffect(SpellEffIndex effIndex)
+    {
+        PreventHitDefaultEffect(effIndex);
+        if (Unit* playerTarget = GetHitPlayer())
+        {
+            if (Unit* trigger = GetCaster())
+            {
+                float angle = playerTarget->GetAngle(trigger);
+                playerTarget->SendMoveKnockBack(playerTarget->ToPlayer(), 30.0f, -7.361481f, cos(angle), sin(angle));
+            }
+        }
+    }
+
+    void Register() override
+    {
+        OnEffectHitTarget += SpellEffectFn(spell_gilneas_pull_to::HandPullEffect, EFFECT_0, SPELL_EFFECT_PULL_TOWARDS);
+    }
+};
+
 void AddSC_gilneas_c1()
 {
     new npc_frightened_citizen();
     RegisterSpellScript(spell_summon_josiah);
+    RegisterSpellScript(spell_gilneas_pull_to);
 }
