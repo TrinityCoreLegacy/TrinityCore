@@ -3012,7 +3012,9 @@ void SpellMgr::LoadSpellInfoCorrections()
         53457, // Summon Impale Trigger (AoE)
         58121, // Torch
         43109, // Throw Torch
-        68591  // Fiery Boulder
+        68591, // Fiery Boulder
+        58552, // Return to Orgrimmar
+        58533  // Return to Stormwind
     }, [](SpellInfo* spellInfo)
     {
         spellInfo->MaxAffectedTargets = 1;
