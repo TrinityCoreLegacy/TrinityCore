@@ -2463,7 +2463,7 @@ public:
     }
 };
 
-//  40693 - Cage Trap
+// 40693 - Cage Trap
 class spell_illidan_cage_teleport : public SpellScriptLoader
 {
     public:

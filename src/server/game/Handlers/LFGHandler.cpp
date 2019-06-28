@@ -249,7 +249,7 @@ void WorldSession::HandleLfgSetRolesOpcode(WorldPacket& recvData)
     sLFGMgr->UpdateRoleCheck(gguid, guid, roles);
 }
 
-void WorldSession::HandleLfgSetCommentOpcode(WorldPacket&  recvData)
+void WorldSession::HandleLfgSetCommentOpcode(WorldPacket& recvData)
 {
     uint32 length = recvData.ReadBits(9);
     std::string comment = recvData.ReadString(length);
