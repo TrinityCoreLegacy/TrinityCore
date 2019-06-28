@@ -1,3 +1,4 @@
+/*
 -- Crag boar
 DELETE FROM `creature_loot_template` WHERE `Entry`=1125;
 INSERT INTO `creature_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`, `Comment`) VALUES
@@ -10,3 +11,4 @@ INSERT INTO `creature_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `Q
 (1125, 24700, 24700,       1, 0 ,1, 2, 1, 1, "Patterns"),
 (1125, 24701, 24701,       1, 0 ,1, 2, 1, 1, "Patterns"),
 (1125, 11111, 11111,     0.1, 0, 1, 3, 1, 1, "Bags");
+*/
