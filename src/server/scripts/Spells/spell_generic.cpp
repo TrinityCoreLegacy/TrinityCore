@@ -369,7 +369,7 @@ class spell_gen_aura_service_uniform : public SpellScriptLoader
                 Unit* target = GetTarget();
                 if (target->GetTypeId() == TYPEID_PLAYER)
                 {
-                    if (target->GetGender() == GENDER_MALE)
+                    if (target->GetNativeGender() == GENDER_MALE)
                         target->SetDisplayId(MODEL_GOBLIN_MALE);
                     else
                         target->SetDisplayId(MODEL_GOBLIN_FEMALE);
@@ -1294,7 +1294,7 @@ class spell_gen_dalaran_disguise : public SpellScriptLoader
             {
                 if (Player* player = GetHitPlayer())
                 {
-                    uint8 gender = player->GetGender();
+                    uint8 gender = player->GetNativeGender();
 
                     uint32 spellId = GetSpellInfo()->Id;
 
@@ -2596,7 +2596,7 @@ class spell_gen_orc_disguise : public SpellScriptLoader
                 Unit* caster = GetCaster();
                 if (Player* target = GetHitPlayer())
                 {
-                    uint8 gender = target->GetGender();
+                    uint8 gender = target->GetNativeGender();
                     if (!gender)
                         caster->CastSpell(target, SPELL_ORC_DISGUISE_MALE, true);
                     else
@@ -3048,7 +3048,7 @@ class spell_gen_running_wild : public SpellScriptLoader
                 Unit* target = GetTarget();
                 PreventDefaultAction();
 
-                target->Mount(target->GetGender() == GENDER_FEMALE ? RUNNING_WILD_MODEL_FEMALE : RUNNING_WILD_MODEL_MALE, 0, 0);
+                target->Mount(target->GetNativeGender() == GENDER_FEMALE ? RUNNING_WILD_MODEL_FEMALE : RUNNING_WILD_MODEL_MALE, 0, 0);
 
                 // cast speed aura
                 if (MountCapabilityEntry const* mountCapability = sMountCapabilityStore.LookupEntry(aurEff->GetAmount()))

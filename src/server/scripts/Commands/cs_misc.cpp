@@ -1641,7 +1641,7 @@ public:
             mapId             = target->GetMapId();
             areaId            = target->GetAreaId();
             alive             = target->IsAlive() ? handler->GetTrinityString(LANG_YES) : handler->GetTrinityString(LANG_NO);
-            gender            = target->GetGender();
+            gender            = target->GetNativeGender();
         }
         // get additional information from DB
         else

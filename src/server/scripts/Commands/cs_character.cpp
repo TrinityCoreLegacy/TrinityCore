@@ -280,7 +280,7 @@ public:
         {
             if (target->HasTitle(titleInfo))
             {
-                std::string name = target->GetGender() == GENDER_MALE ? titleInfo->nameMale : titleInfo->nameFemale;
+                std::string name = target->GetNativeGender() == GENDER_MALE ? titleInfo->nameMale : titleInfo->nameFemale;
                 if (name.empty())
                     continue;
 

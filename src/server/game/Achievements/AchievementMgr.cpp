@@ -870,7 +870,7 @@ void AchievementMgr<T>::SendAchievementEarned(AchievementEntry const* achievemen
 
     if (Guild* guild = sGuildMgr->GetGuildById(GetOwner()->GetGuildId()))
     {
-        Trinity::BroadcastTextBuilder _builder(GetOwner(), CHAT_MSG_GUILD_ACHIEVEMENT, BROADCAST_TEXT_ACHIEVEMENT_EARNED, GetOwner()->GetGender(), _owner, achievement->ID);
+        Trinity::BroadcastTextBuilder _builder(GetOwner(), CHAT_MSG_GUILD_ACHIEVEMENT, BROADCAST_TEXT_ACHIEVEMENT_EARNED, GetOwner()->GetNativeGender(), _owner, achievement->ID);
         Trinity::LocalizedPacketDo<Trinity::BroadcastTextBuilder> _localizer(_builder);
         guild->BroadcastWorker(_localizer, GetOwner());
     }
@@ -888,7 +888,7 @@ void AchievementMgr<T>::SendAchievementEarned(AchievementEntry const* achievemen
     // if player is in world he can tell his friends about new achievement
     else if (GetOwner()->IsInWorld())
     {
-        Trinity::BroadcastTextBuilder _builder(GetOwner(), CHAT_MSG_ACHIEVEMENT, BROADCAST_TEXT_ACHIEVEMENT_EARNED, GetOwner()->GetGender(), _owner, achievement->ID);
+        Trinity::BroadcastTextBuilder _builder(GetOwner(), CHAT_MSG_ACHIEVEMENT, BROADCAST_TEXT_ACHIEVEMENT_EARNED, GetOwner()->GetNativeGender(), _owner, achievement->ID);
         Trinity::LocalizedPacketDo<Trinity::BroadcastTextBuilder> _localizer(_builder);
         Trinity::PlayerDistWorker<Trinity::LocalizedPacketDo<Trinity::BroadcastTextBuilder>> _worker(GetOwner(), sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY), _localizer);
         Cell::VisitWorldObjects(GetOwner(), _worker, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY));
@@ -1965,7 +1965,7 @@ void AchievementMgr<Player>::CompletedAchievement(AchievementEntry const* achiev
     //! Since no common attributes were found, (not even in titleRewardFlags field)
     //! we explicitly check by ID. Maybe in the future we could move the achievement_reward
     //! condition fields to the condition system.
-    if (uint32 titleId = reward->TitleId[achievement->ID == 1793 ? GetOwner()->GetByteValue(PLAYER_BYTES_3, PLAYER_BYTES_3_OFFSET_GENDER) : (GetOwner()->GetTeam() == ALLIANCE ? 0 : 1)])
+    if (uint32 titleId = reward->TitleId[achievement->ID == 1793 ? GetOwner()->GetNativeGender() : (GetOwner()->GetTeam() == ALLIANCE ? 0 : 1)])
         if (CharTitlesEntry const* titleEntry = sCharTitlesStore.LookupEntry(titleId))
             GetOwner()->SetTitle(titleEntry);
 
