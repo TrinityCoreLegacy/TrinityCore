@@ -1848,7 +1848,7 @@ void AuraEffect::HandleAuraModShapeshift(AuraApplication const* aurApp, uint8 mo
             int32 oldPower = target->GetPower(PowerType);
             // reset power to default values only at power change
             if (target->getPowerType() != PowerType)
-                target->setPowerType(PowerType);
+                target->SetPowerType(PowerType);
 
             if (form == FORM_CAT || form == FORM_BEAR)
             {
@@ -1893,7 +1893,7 @@ void AuraEffect::HandleAuraModShapeshift(AuraApplication const* aurApp, uint8 mo
             target->SetShapeshiftForm(FORM_NONE);
             if (target->GetClass() == CLASS_DRUID)
             {
-                target->setPowerType(POWER_MANA);
+                target->SetPowerType(POWER_MANA);
                 // Remove movement impairing effects also when shifting out
                 target->RemoveMovementImpairingAuras();
             }
