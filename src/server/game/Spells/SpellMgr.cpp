@@ -3014,7 +3014,8 @@ void SpellMgr::LoadSpellInfoCorrections()
         43109, // Throw Torch
         68591, // Fiery Boulder
         58552, // Return to Orgrimmar
-        58533  // Return to Stormwind
+        58533, // Return to Stormwind
+        21855  // Challenge Flag
     }, [](SpellInfo* spellInfo)
     {
         spellInfo->MaxAffectedTargets = 1;
