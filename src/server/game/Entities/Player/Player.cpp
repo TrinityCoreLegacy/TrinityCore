@@ -15967,7 +15967,7 @@ void Player::SendQuestUpdate(uint32 questId)
         }
     }
 
-    UpdateForQuestWorldObjects();
+    UpdateVisibleGameobjectsOrSpellClicks();
     PhasingHandler::OnConditionChange(this);
 }
 
@@ -16277,12 +16277,12 @@ void Player::ItemAddedQuestCheck(uint32 entry, uint32 count)
                 if (CanCompleteQuest(questid))
                     CompleteQuest(questid);
                 else if (q_status.ItemCount[j] == reqitemcount) // Send quest update when an objective is completed
-                    UpdateForQuestWorldObjects();
+                    UpdateVisibleGameobjectsOrSpellClicks();
                 return;
             }
         }
     }
-    UpdateForQuestWorldObjects();
+    UpdateVisibleGameobjectsOrSpellClicks();
 }
 
 void Player::ItemRemovedQuestCheck(uint32 entry, uint32 count)
@@ -16325,7 +16325,7 @@ void Player::ItemRemovedQuestCheck(uint32 entry, uint32 count)
             }
         }
     }
-    UpdateForQuestWorldObjects();
+    UpdateVisibleGameobjectsOrSpellClicks();
 }
 
 void Player::KilledMonster(CreatureTemplate const* cInfo, ObjectGuid guid)
@@ -24051,7 +24051,7 @@ bool Player::HasQuestForGO(int32 GOId) const
     return false;
 }
 
-void Player::UpdateForQuestWorldObjects()
+void Player::UpdateVisibleGameobjectsOrSpellClicks()
 {
     if (m_clientGUIDs.empty())
         return;
@@ -24078,20 +24078,10 @@ void Player::UpdateForQuestWorldObjects()
             SpellClickInfoMapBounds clickPair = sObjectMgr->GetSpellClickInfoMapBounds(obj->GetEntry());
             for (SpellClickInfoContainer::const_iterator _itr = clickPair.first; _itr != clickPair.second; ++_itr)
             {
-                //! This code doesn't look right, but it was logically converted to condition system to do the exact
-                //! same thing it did before. It definitely needs to be overlooked for intended functionality.
                 if (ConditionContainer const* conds = sConditionMgr->GetConditionsForSpellClickEvent(obj->GetEntry(), _itr->second.spellId))
                 {
-                    bool buildUpdateBlock = false;
-                    for (ConditionContainer::const_iterator jtr = conds->begin(); jtr != conds->end() && !buildUpdateBlock; ++jtr)
-                        if ((*jtr)->ConditionType == CONDITION_QUESTREWARDED || (*jtr)->ConditionType == CONDITION_QUESTTAKEN || (*jtr)->ConditionType == CONDITION_QUEST_COMPLETE)
-                            buildUpdateBlock = true;
-
-                    if (buildUpdateBlock)
-                    {
-                        obj->BuildValuesUpdateBlockForPlayer(&udata, this);
-                        break;
-                    }
+                    obj->BuildValuesUpdateBlockForPlayer(&udata, this);
+                    break;
                 }
             }
         }
