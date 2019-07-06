@@ -2001,6 +2001,7 @@ class spell_item_ultrasafe_transporter : public SpellScript
                 spellId = SPELL_EVIL_TWIN;
                 break;
             default:
+                break;
         }
 
         caster->CastSpell(caster, spellId, true);

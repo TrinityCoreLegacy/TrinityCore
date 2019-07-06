@@ -80,7 +80,7 @@ class boss_amanitar : public CreatureScript
             void JustDied(Unit* /*killer*/) override
             {
                 _JustDied();
-                instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_MINI);
+                instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_MINI, true, true);
             }
 
             void SpawnAdds()
