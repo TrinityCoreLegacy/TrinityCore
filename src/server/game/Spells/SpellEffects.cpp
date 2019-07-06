@@ -3209,11 +3209,6 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
                     }
                     return;
                 }
-                case 55693:                                 // Remove Collapsing Cave Aura
-                    if (!unitTarget)
-                        return;
-                    unitTarget->RemoveAurasDueToSpell(m_spellInfo->Effects[effIndex].CalcValue());
-                    break;
                 // Bending Shinbone
                 case 8856:
                 {
