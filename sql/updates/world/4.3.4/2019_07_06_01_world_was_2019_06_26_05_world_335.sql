@@ -1,3 +1,4 @@
+/*
 -- Servant of Razelikh
 UPDATE `creature_template` SET `AIName`="SmartAI" WHERE `entry` IN (7668,7669,7670,7671);
 DELETE FROM `smart_scripts` WHERE `entryorguid` IN (7668,7669,7670,7671) AND `source_type`=0;
@@ -79,3 +80,4 @@ INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Lan
 (7671,1,4,"It was not his fault. Tell him that...",12,0,100,0,0,0,3684,0,"Servant of Sevine"),
 (7671,1,5,"Finally, released from his cursed grasp. Father, I come... ",12,0,100,0,0,0,3685,0,"Servant of Sevine"),
 (7671,2,0,"Stone of Binding shatters, releasing the soul which it held.",16,0,100,0,0,0,0,0,"Servant of Sevine");
+*/
