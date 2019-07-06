@@ -1055,9 +1055,9 @@ bool Creature::isCanInteractWithBattleMaster(Player* player, bool msg) const
 
 bool Creature::isCanTrainingAndResetTalentsOf(Player* player) const
 {
-    return player->getLevel() >= 10
+    return player->GetLevel() >= 10
         && GetCreatureTemplate()->trainer_type == TRAINER_TYPE_CLASS
-        && player->getClass() == GetCreatureTemplate()->trainer_class;
+        && player->GetClass() == GetCreatureTemplate()->trainer_class;
 }
 
 Player* Creature::GetLootRecipient() const
@@ -1245,7 +1245,7 @@ void Creature::UpdateLevelDependantStats()
 {
     CreatureTemplate const* cInfo = GetCreatureTemplate();
     uint32 rank = IsPet() ? 0 : cInfo->rank;
-    CreatureBaseStats const* stats = sObjectMgr->GetCreatureBaseStats(getLevel(), cInfo->unit_class);
+    CreatureBaseStats const* stats = sObjectMgr->GetCreatureBaseStats(GetLevel(), cInfo->unit_class);
 
     // health
     float healthmod = _GetHealthMod(rank);
@@ -1262,7 +1262,7 @@ void Creature::UpdateLevelDependantStats()
     uint32 mana = stats->GenerateMana(cInfo);
     SetCreateMana(mana);
 
-    switch (getClass())
+    switch (GetClass())
     {
         case CLASS_WARRIOR:
             setPowerType(POWER_RAGE);
@@ -1670,7 +1670,7 @@ bool Creature::CanStartAttack(Unit const* who, bool force) const
         return false;
 
     // No aggro from gray creatures
-    if (CheckNoGrayAggroConfig(who->getLevelForTarget(this), getLevelForTarget(who)))
+    if (CheckNoGrayAggroConfig(who->GetLevelForTarget(this), GetLevelForTarget(who)))
         return false;
 
     return IsWithinLOSInMap(who);
@@ -1700,8 +1700,8 @@ float Creature::GetAttackDistance(Unit const* player) const
     float aggroRate = sWorld->getRate(RATE_CREATURE_AGGRO);
     uint8 expansionMaxLevel = uint8(GetMaxLevelForExpansion(GetCreatureTemplate()->expansion));
 
-    uint32 playerLevel = player->getLevel();
-    uint32 creatureLevel = getLevel();
+    uint32 playerLevel = player->GetLevel();
+    uint32 creatureLevel = GetLevel();
 
     if (aggroRate == 0.0f)
         return 0.0f;
@@ -2553,12 +2553,12 @@ void Creature::AllLootRemovedFromCorpse()
     m_respawnTime = std::max<time_t>(m_corpseRemoveTime + m_respawnDelay, m_respawnTime);
 }
 
-uint8 Creature::getLevelForTarget(WorldObject const* target) const
+uint8 Creature::GetLevelForTarget(WorldObject const* target) const
 {
     if (!isWorldBoss() || !target->ToUnit())
-        return Unit::getLevelForTarget(target);
+        return Unit::GetLevelForTarget(target);
 
-    uint16 level = target->ToUnit()->getLevel() + sWorld->getIntConfig(CONFIG_WORLD_BOSS_LEVEL_DIFF);
+    uint16 level = target->ToUnit()->GetLevel() + sWorld->getIntConfig(CONFIG_WORLD_BOSS_LEVEL_DIFF);
     if (level < 1)
         return 1;
     if (level > 255)
@@ -2736,11 +2736,11 @@ float Creature::GetAggroRange(Unit const* target) const
         uint32 targetLevel = 0;
 
         if (target->GetTypeId() == TYPEID_PLAYER)
-            targetLevel = target->getLevelForTarget(this);
+            targetLevel = target->GetLevelForTarget(this);
         else if (target->GetTypeId() == TYPEID_UNIT)
-            targetLevel = target->ToCreature()->getLevelForTarget(this);
+            targetLevel = target->ToCreature()->GetLevelForTarget(this);
 
-        uint32 myLevel = getLevelForTarget(target);
+        uint32 myLevel = GetLevelForTarget(target);
         int32 levelDiff = int32(targetLevel) - int32(myLevel);
 
         // The maximum Aggro Radius is capped at 45 yards (25 level difference)

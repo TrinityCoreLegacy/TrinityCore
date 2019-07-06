@@ -280,7 +280,7 @@ float Player::GetHealthBonusFromStamina()
 {
     // Taken from PaperDollFrame.lua - 4.3.4.15595
     float ratio = 10.0f;
-    if (gtOCTHpPerStaminaEntry const* hpBase = sGtOCTHpPerStaminaStore.LookupEntry((getClass() - 1) * GT_MAX_LEVEL + getLevel() - 1))
+    if (gtOCTHpPerStaminaEntry const* hpBase = sGtOCTHpPerStaminaStore.LookupEntry((GetClass() - 1) * GT_MAX_LEVEL + GetLevel() - 1))
         ratio = hpBase->ratio;
 
     float stamina = GetStat(STAT_STAMINA);
@@ -330,9 +330,9 @@ void Player::UpdateMaxPower(Powers power)
 void Player::UpdateAttackPowerAndDamage(bool ranged)
 {
     float val2 = 0.0f;
-    float level = float(getLevel());
+    float level = float(GetLevel());
 
-    ChrClassesEntry const* entry = sChrClassesStore.LookupEntry(getClass());
+    ChrClassesEntry const* entry = sChrClassesStore.LookupEntry(GetClass());
     UnitMods unitMod = ranged ? UNIT_MOD_ATTACK_POWER_RANGED : UNIT_MOD_ATTACK_POWER;
 
     uint16 index = ranged ? UNIT_FIELD_RANGED_ATTACK_POWER : UNIT_FIELD_ATTACK_POWER;
@@ -390,7 +390,7 @@ void Player::UpdateAttackPowerAndDamage(bool ranged)
         UpdateDamagePhysical(BASE_ATTACK);
         if (CanDualWield() && haveOffhandWeapon())           //allow update offhand damage only if player knows DualWield Spec and has equipped offhand weapon
             UpdateDamagePhysical(OFF_ATTACK);
-        if (getClass() == CLASS_SHAMAN || getClass() == CLASS_PALADIN)                      // mental quickness
+        if (GetClass() == CLASS_SHAMAN || GetClass() == CLASS_PALADIN)                      // mental quickness
             UpdateSpellDamageAndHealingBonus();
 
         if (pet && pet->IsPetGhoul()) // At melee attack power change for DK pet
@@ -613,7 +613,7 @@ void Player::UpdateParryPercentage()
 
     // No parry
     float value = 0.0f;
-    uint32 pclass = getClass()-1;
+    uint32 pclass = GetClass()-1;
     if (CanParry() && parry_cap[pclass] > 0.0f)
     {
         float nondiminishing  = 5.0f;
@@ -656,7 +656,7 @@ void Player::UpdateDodgePercentage()
     // Dodge from rating
     diminishing += GetRatingBonusValue(CR_DODGE);
     // apply diminishing formula to diminishing dodge chance
-    uint32 pclass = getClass()-1;
+    uint32 pclass = GetClass()-1;
     float value = nondiminishing + (diminishing * dodge_cap[pclass] / (diminishing + dodge_cap[pclass] * m_diminishing_k[pclass]));
 
     if (sWorld->getBoolConfig(CONFIG_STATS_LIMITS_ENABLE))
@@ -790,7 +790,7 @@ void Player::UpdateManaRegen()
         SetStatFloatValue(UNIT_FIELD_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER, base_regen + CalculatePct(spirit_regen, modManaRegenInterrupt));
         SetStatFloatValue(UNIT_FIELD_POWER_REGEN_FLAT_MODIFIER, 0.001f + spirit_regen + base_regen);
     }
-    else if (getClass() == CLASS_HUNTER)
+    else if (GetClass() == CLASS_HUNTER)
         SetFloatValue(UNIT_FIELD_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER, -0.2f);
 }
 
@@ -1018,7 +1018,7 @@ bool Guardian::UpdateStats(Stats stat)
                                                             //warlock's and mage's pets gain 30% of owner's intellect
     else if (stat == STAT_INTELLECT)
     {
-        if (owner->getClass() == CLASS_WARLOCK || owner->getClass() == CLASS_MAGE)
+        if (owner->GetClass() == CLASS_WARLOCK || owner->GetClass() == CLASS_MAGE)
         {
             ownersBonus = CalculatePct(owner->GetStat(stat), 30);
             value += ownersBonus;

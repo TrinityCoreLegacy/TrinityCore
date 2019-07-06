@@ -221,7 +221,7 @@ void Archaeology::RegeneratePosition(uint32 position, Continent continent)
     if (_site[position].Entry && sResearchSiteStore.LookupEntry(_site[position].Entry) && _site[position].State < DIGS_PER_SITE)
         return;
 
-    uint16 entry = sArchaeologyMgr->GetNewSite(continent, _site, _continentState[continent] == STATE_EXT, _player->getLevel());
+    uint16 entry = sArchaeologyMgr->GetNewSite(continent, _site, _continentState[continent] == STATE_EXT, _player->GetLevel());
     SetSite(position, entry);
     CharacterDatabase.PExecute("REPLACE INTO character_archaeology_sites values (%u, %u, %u, %u);", _player->GetGUID(), position, entry, _site[position].State);
 }

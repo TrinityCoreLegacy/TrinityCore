@@ -467,7 +467,7 @@ bool PlayerAI::IsPlayerHealer(Player const* who)
     if (!who)
         return false;
 
-    switch (who->getClass())
+    switch (who->GetClass())
     {
         case CLASS_WARRIOR:
         case CLASS_HUNTER:
@@ -493,7 +493,7 @@ bool PlayerAI::IsPlayerRangedAttacker(Player const* who)
     if (!who)
         return false;
 
-    switch (who->getClass())
+    switch (who->GetClass())
     {
         case CLASS_WARRIOR:
         case CLASS_PALADIN:
@@ -718,7 +718,7 @@ PlayerAI::TargetedSpell SimpleCharmedPlayerAI::SelectAppropriateCastForSpec()
 {
     PossibleSpellVector spells;
 
-    switch (me->getClass())
+    switch (me->GetClass())
     {
         case CLASS_WARRIOR:
             if (!me->IsWithinMeleeRange(me->GetVictim()))

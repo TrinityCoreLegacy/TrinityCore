@@ -77,7 +77,7 @@ class npc_pet_hunter_snake_trap : public CreatureScript
 
                 _isViper = Info->Entry == NPC_HUNTER_VIPER ? true : false;
 
-                me->SetMaxHealth(uint32(107 * (me->getLevel() - 40) * 0.025f));
+                me->SetMaxHealth(uint32(107 * (me->GetLevel() - 40) * 0.025f));
                 // Add delta to make them not all hit the same time
                 uint32 delta = (rand32() % 7) * 100;
                 me->SetAttackTime(BASE_ATTACK, Info->BaseAttackTime + delta);

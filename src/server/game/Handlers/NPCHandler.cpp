@@ -265,7 +265,7 @@ void WorldSession::HandleTrainerBuySpellOpcode(WorldPacket& recvData)
     }
 
     // check class for class trainers
-    if (_player->getClass() != trainer->GetCreatureTemplate()->trainer_class && trainer->GetCreatureTemplate()->trainer_type == TRAINER_TYPE_CLASS)
+    if (_player->GetClass() != trainer->GetCreatureTemplate()->trainer_class && trainer->GetCreatureTemplate()->trainer_type == TRAINER_TYPE_CLASS)
         return;
 
     // check present spell in trainer spell list
@@ -520,7 +520,7 @@ void WorldSession::SendStablePetCallback(ObjectGuid guid, PreparedQueryResult re
         data << uint32(num);                                // 4.x unknown, some kind of order?
         data << uint32(pet->GetCharmInfo()->GetPetNumber());
         data << uint32(pet->GetEntry());
-        data << uint32(pet->getLevel());
+        data << uint32(pet->GetLevel());
         data << pet->GetName();                             // petname
         data << uint8(1);                                   // 1 = current, 2/3 = in stable (any from 4, 5, ... create problems with proper show)
         ++num;

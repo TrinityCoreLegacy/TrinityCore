@@ -280,7 +280,7 @@ public:
         {
             if (target->HasTitle(titleInfo))
             {
-                std::string name = target->getGender() == GENDER_MALE ? titleInfo->nameMale : titleInfo->nameFemale;
+                std::string name = target->GetGender() == GENDER_MALE ? titleInfo->nameMale : titleInfo->nameFemale;
                 if (name.empty())
                     continue;
 
@@ -452,7 +452,7 @@ public:
         if (!handler->extractPlayerTarget(nameStr, &target, &targetGuid, &targetName))
             return false;
 
-        int32 oldlevel = target ? target->getLevel() : sCharacterCache->GetCharacterLevelByGuid(targetGuid);
+        int32 oldlevel = target ? target->GetLevel() : sCharacterCache->GetCharacterLevelByGuid(targetGuid);
         int32 newlevel = levelStr ? atoi(levelStr) : oldlevel;
 
         if (newlevel < 1)
@@ -906,7 +906,7 @@ public:
         if (!handler->extractPlayerTarget(nameStr, &target, &targetGuid, &targetName))
             return false;
 
-        int32 oldlevel = target ? target->getLevel() : sCharacterCache->GetCharacterLevelByGuid(targetGuid);
+        int32 oldlevel = target ? target->GetLevel() : sCharacterCache->GetCharacterLevelByGuid(targetGuid);
         int32 addlevel = levelStr ? atoi(levelStr) : 1;
         int32 newlevel = oldlevel + addlevel;
 

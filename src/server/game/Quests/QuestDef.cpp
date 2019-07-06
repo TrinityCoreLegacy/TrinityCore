@@ -248,12 +248,12 @@ uint32 Quest::XPValue(Player* player) const
 {
     if (player)
     {
-        int32 quest_level = (Level == -1 ? player->getLevel() : Level);
+        int32 quest_level = (Level == -1 ? player->GetLevel() : Level);
         const QuestXPEntry* xpentry = sQuestXPStore.LookupEntry(quest_level);
         if (!xpentry)
             return 0;
 
-        int32 diffFactor = 2 * (quest_level - player->getLevel()) + 20;
+        int32 diffFactor = 2 * (quest_level - player->GetLevel()) + 20;
         if (diffFactor < 1)
             diffFactor = 1;
         else if (diffFactor > 10)
@@ -322,7 +322,7 @@ void Quest::BuildExtraQuestInfo(WorldPacket& data, Player* player) const
 
     /* Pre cata struct, some of these unks might be the missing values in cata:
     // rewarded honor points. Multiply with 10 to satisfy client
-    data << 10 * Trinity::Honor::hk_honor_at_level(_session->GetPlayer()->getLevel(), quest->GetRewHonorMultiplier());
+    data << 10 * Trinity::Honor::hk_honor_at_level(_session->GetPlayer()->GetLevel(), quest->GetRewHonorMultiplier());
     data << float(0);                                       // unk, honor multiplier?
     data << uint32(0x08);                                   // unused by client?
     data << uint32(quest->GetRewSpell());                   // reward spell, this spell will display (icon) (casted if RewSpellCast == 0)

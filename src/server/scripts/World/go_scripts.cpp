@@ -1181,7 +1181,7 @@ class go_amberpine_outhouse : public GameObjectScript
                     Creature* target = player->FindNearestCreature(NPC_OUTHOUSE_BUNNY, 3.0f);
                     if (target)
                     {
-                        target->AI()->SetData(1, player->getGender());
+                        target->AI()->SetData(1, player->GetGender());
                         me->CastSpell(target, SPELL_INDISPOSED_III);
                     }
                     me->CastSpell(player, SPELL_INDISPOSED);

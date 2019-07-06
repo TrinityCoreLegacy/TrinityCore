@@ -360,7 +360,7 @@ class TC_GAME_API WorldObject : public Object, public WorldLocation
         virtual void SendMessageToSetInRange(WorldPacket* data, float dist, bool self);
         virtual void SendMessageToSet(WorldPacket* data, Player const* skipped_rcvr);
 
-        virtual uint8 getLevelForTarget(WorldObject const* /*target*/) const { return 1; }
+        virtual uint8 GetLevelForTarget(WorldObject const* /*target*/) const { return 1; }
 
         void PlayDistanceSound(uint32 sound_id, Player* target = nullptr);
         void PlayDirectSound(uint32 sound_id, Player* target = nullptr);

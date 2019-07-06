@@ -902,7 +902,7 @@ public:
             return false;
         }
 
-        PlayerInfo const* info = sObjectMgr->GetPlayerInfo(target->getRace(), target->getClass());
+        PlayerInfo const* info = sObjectMgr->GetPlayerInfo(target->getRace(), target->GetClass());
         if (!info)
             return false;
 
@@ -913,14 +913,14 @@ public:
 
         if (!strncmp(gender_str, "male", gender_len))            // MALE
         {
-            if (target->getGender() == GENDER_MALE)
+            if (target->GetGender() == GENDER_MALE)
                 return true;
 
             gender = GENDER_MALE;
         }
         else if (!strncmp(gender_str, "female", gender_len))    // FEMALE
         {
-            if (target->getGender() == GENDER_FEMALE)
+            if (target->GetGender() == GENDER_FEMALE)
                 return true;
 
             gender = GENDER_FEMALE;

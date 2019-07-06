@@ -1165,7 +1165,7 @@ public:
             CharTitlesEntry const* titleInfo = sCharTitlesStore.LookupEntry(id);
             if (titleInfo)
             {
-                std::string name = target->getGender() == GENDER_MALE ? titleInfo->nameMale : titleInfo->nameFemale;
+                std::string name = target->GetGender() == GENDER_MALE ? titleInfo->nameMale : titleInfo->nameFemale;
 
                 if (name.empty())
                     continue;

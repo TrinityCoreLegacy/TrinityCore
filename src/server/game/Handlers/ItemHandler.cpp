@@ -641,7 +641,7 @@ void WorldSession::SendListInventory(ObjectGuid vendorGuid)
             if (!_player->IsGameMaster()) // ignore conditions if GM on
             {
                 // Respect allowed class
-                if (!(itemTemplate->AllowableClass & _player->getClassMask()) && itemTemplate->Bonding == BIND_WHEN_PICKED_UP)
+                if (!(itemTemplate->AllowableClass & _player->GetClassMask()) && itemTemplate->Bonding == BIND_WHEN_PICKED_UP)
                     continue;
 
                 // Only display items in vendor lists for the team the player is on

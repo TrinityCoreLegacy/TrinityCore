@@ -289,7 +289,7 @@ bool AchievementCriteriaData::Meets(uint32 criteria_id, Player const* source, Un
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_CLASS_RACE:
             if (!target || target->GetTypeId() != TYPEID_PLAYER)
                 return false;
-            if (classRace.class_id && classRace.class_id != target->ToPlayer()->getClass())
+            if (classRace.class_id && classRace.class_id != target->ToPlayer()->GetClass())
                 return false;
             if (classRace.race_id && classRace.race_id != target->ToPlayer()->getRace())
                 return false;
@@ -297,7 +297,7 @@ bool AchievementCriteriaData::Meets(uint32 criteria_id, Player const* source, Un
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_S_PLAYER_CLASS_RACE:
             if (source->GetTypeId() != TYPEID_PLAYER)
                 return false;
-            if (classRace.class_id && classRace.class_id != source->ToPlayer()->getClass())
+            if (classRace.class_id && classRace.class_id != source->ToPlayer()->GetClass())
                 return false;
             if (classRace.race_id && classRace.race_id != source->ToPlayer()->getRace())
                 return false;
@@ -315,11 +315,11 @@ bool AchievementCriteriaData::Meets(uint32 criteria_id, Player const* source, Un
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_T_LEVEL:
             if (!target)
                 return false;
-            return target->getLevel() >= level.minlevel;
+            return target->GetLevel() >= level.minlevel;
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_T_GENDER:
             if (!target)
                 return false;
-            return target->getGender() == gender.gender;
+            return target->GetGender() == gender.gender;
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_SCRIPT:
             return sScriptMgr->OnCriteriaCheck(ScriptId, const_cast<Player*>(source), const_cast<Unit*>(target));
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_MAP_PLAYER_COUNT:
@@ -870,7 +870,7 @@ void AchievementMgr<T>::SendAchievementEarned(AchievementEntry const* achievemen
 
     if (Guild* guild = sGuildMgr->GetGuildById(GetOwner()->GetGuildId()))
     {
-        Trinity::BroadcastTextBuilder _builder(GetOwner(), CHAT_MSG_GUILD_ACHIEVEMENT, BROADCAST_TEXT_ACHIEVEMENT_EARNED, GetOwner()->getGender(), _owner, achievement->ID);
+        Trinity::BroadcastTextBuilder _builder(GetOwner(), CHAT_MSG_GUILD_ACHIEVEMENT, BROADCAST_TEXT_ACHIEVEMENT_EARNED, GetOwner()->GetGender(), _owner, achievement->ID);
         Trinity::LocalizedPacketDo<Trinity::BroadcastTextBuilder> _localizer(_builder);
         guild->BroadcastWorker(_localizer, GetOwner());
     }
@@ -888,7 +888,7 @@ void AchievementMgr<T>::SendAchievementEarned(AchievementEntry const* achievemen
     // if player is in world he can tell his friends about new achievement
     else if (GetOwner()->IsInWorld())
     {
-        Trinity::BroadcastTextBuilder _builder(GetOwner(), CHAT_MSG_ACHIEVEMENT, BROADCAST_TEXT_ACHIEVEMENT_EARNED, GetOwner()->getGender(), _owner, achievement->ID);
+        Trinity::BroadcastTextBuilder _builder(GetOwner(), CHAT_MSG_ACHIEVEMENT, BROADCAST_TEXT_ACHIEVEMENT_EARNED, GetOwner()->GetGender(), _owner, achievement->ID);
         Trinity::LocalizedPacketDo<Trinity::BroadcastTextBuilder> _localizer(_builder);
         Trinity::PlayerDistWorker<Trinity::LocalizedPacketDo<Trinity::BroadcastTextBuilder>> _worker(GetOwner(), sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY), _localizer);
         Cell::VisitWorldObjects(GetOwner(), _worker, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_SAY));
@@ -1272,7 +1272,7 @@ void AchievementMgr<T>::UpdateAchievementCriteria(AchievementCriteriaTypes type,
             SetCriteriaProgress(achievementCriteria, miscValue1, referencePlayer, PROGRESS_HIGHEST);
             break;
         case ACHIEVEMENT_CRITERIA_TYPE_REACH_LEVEL:
-            SetCriteriaProgress(achievementCriteria, referencePlayer->getLevel(), referencePlayer);
+            SetCriteriaProgress(achievementCriteria, referencePlayer->GetLevel(), referencePlayer);
             break;
         case ACHIEVEMENT_CRITERIA_TYPE_REACH_SKILL_LEVEL:
             if (uint32 skillvalue = referencePlayer->GetBaseSkillValue(achievementCriteria->reach_skill_level.skillID))
@@ -2868,7 +2868,7 @@ bool AchievementMgr<T>::AdditionalRequirementsSatisfied(AchievementCriteriaEntry
                     return false;
                 break;
             case ACHIEVEMENT_CRITERIA_ADDITIONAL_CONDITION_SOURCE_CLASS: // 26
-                if (referencePlayer->getClass() != reqValue)
+                if (referencePlayer->GetClass() != reqValue)
                     return false;
                 break;
             case ACHIEVEMENT_CRITERIA_ADDITIONAL_CONDITION_TARGET_RACE: // 27
@@ -2876,7 +2876,7 @@ bool AchievementMgr<T>::AdditionalRequirementsSatisfied(AchievementCriteriaEntry
                     return false;
                 break;
             case ACHIEVEMENT_CRITERIA_ADDITIONAL_CONDITION_TARGET_CLASS: // 28
-                if (!unit || unit->GetTypeId() != TYPEID_PLAYER || unit->getClass() != reqValue)
+                if (!unit || unit->GetTypeId() != TYPEID_PLAYER || unit->GetClass() != reqValue)
                     return false;
                 break;
             case ACHIEVEMENT_CRITERIA_ADDITIONAL_CONDITION_MAX_GROUP_MEMBERS: // 29
@@ -2902,11 +2902,11 @@ bool AchievementMgr<T>::AdditionalRequirementsSatisfied(AchievementCriteriaEntry
                     return false;
                 break;
             case ACHIEVEMENT_CRITERIA_ADDITIONAL_CONDITION_SOURCE_LEVEL: // 39
-                if (referencePlayer->getLevel() != reqValue)
+                if (referencePlayer->GetLevel() != reqValue)
                     return false;
                 break;
             case ACHIEVEMENT_CRITERIA_ADDITIONAL_CONDITION_TARGET_LEVEL: // 40
-                if (!unit || unit->getLevel() != reqValue)
+                if (!unit || unit->GetLevel() != reqValue)
                     return false;
                 break;
             case ACHIEVEMENT_CRITERIA_ADDITIONAL_CONDITION_TARGET_ZONE: // 41

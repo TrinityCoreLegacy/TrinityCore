@@ -1932,13 +1932,13 @@ bool WorldObject::CanDetectStealthOf(WorldObject const* obj, bool checkAlert) co
         // Level difference: 5 point / level, starting from level 1.
         // There may be spells for this and the starting points too, but
         // not in the DBCs of the client.
-        detectionValue += int32(getLevelForTarget(obj) - 1) * 5;
+        detectionValue += int32(GetLevelForTarget(obj) - 1) * 5;
 
         // Apply modifiers
         detectionValue += m_stealthDetect.GetValue(StealthType(i));
         if (go)
             if (Unit* owner = go->GetOwner())
-                detectionValue -= int32(owner->getLevelForTarget(this) - 1) * 5;
+                detectionValue -= int32(owner->GetLevelForTarget(this) - 1) * 5;
 
         detectionValue -= obj->m_stealth.GetValue(StealthType(i));
 
@@ -2255,7 +2255,7 @@ Creature* WorldObject::SummonTrigger(float x, float y, float z, float ang, uint3
     if (GetTypeId() == TYPEID_PLAYER || GetTypeId() == TYPEID_UNIT)
     {
         summon->SetFaction(((Unit*)this)->GetFaction());
-        summon->SetLevel(((Unit*)this)->getLevel());
+        summon->SetLevel(((Unit*)this)->GetLevel());
     }
 
     if (GetAI)

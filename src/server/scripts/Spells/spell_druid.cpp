@@ -184,7 +184,7 @@ class spell_dru_eclipse_energize : public SpellScriptLoader
                 if (GetCaster()->GetTypeId() != TYPEID_PLAYER)
                     return false;
 
-                if (GetCaster()->ToPlayer()->getClass() != CLASS_DRUID)
+                if (GetCaster()->ToPlayer()->GetClass() != CLASS_DRUID)
                     return false;
 
                 energizeAmount = 0;

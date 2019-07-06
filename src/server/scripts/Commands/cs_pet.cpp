@@ -106,7 +106,7 @@ public:
         pet->SetGuidValue(UNIT_FIELD_CREATEDBY, player->GetGUID());
         pet->SetFaction(player->GetFaction());
 
-        if (!pet->InitStatsForLevel(creatureTarget->getLevel()))
+        if (!pet->InitStatsForLevel(creatureTarget->GetLevel()))
         {
             TC_LOG_ERROR("misc", "InitStatsForLevel() in EffectTameCreature failed! Pet deleted.");
             handler->PSendSysMessage("Error 2");
@@ -115,7 +115,7 @@ public:
         }
 
         // prepare visual effect for levelup
-        pet->SetUInt32Value(UNIT_FIELD_LEVEL, creatureTarget->getLevel()-1);
+        pet->SetUInt32Value(UNIT_FIELD_LEVEL, creatureTarget->GetLevel()-1);
 
         pet->GetCharmInfo()->SetPetNumber(sObjectMgr->GeneratePetNumber(), true);
         // this enables pet details window (Shift+P)
@@ -125,7 +125,7 @@ public:
         pet->GetMap()->AddToMap(pet->ToCreature());
 
         // visual effect for levelup
-        pet->SetUInt32Value(UNIT_FIELD_LEVEL, creatureTarget->getLevel());
+        pet->SetUInt32Value(UNIT_FIELD_LEVEL, creatureTarget->GetLevel());
 
         player->SetMinion(pet, true);
         pet->SavePetToDB(PET_SAVE_AS_CURRENT);
@@ -212,7 +212,7 @@ public:
 
         int32 level = args ? atoi(args) : 0;
         if (level == 0)
-            level = owner->getLevel() - pet->getLevel();
+            level = owner->GetLevel() - pet->GetLevel();
         if (level == 0 || level < -STRONG_MAX_LEVEL || level > STRONG_MAX_LEVEL)
         {
             handler->SendSysMessage(LANG_BAD_VALUE);
@@ -220,11 +220,11 @@ public:
             return false;
         }
 
-        int32 newLevel = pet->getLevel() + level;
+        int32 newLevel = pet->GetLevel() + level;
         if (newLevel < 1)
             newLevel = 1;
-        else if (newLevel > owner->getLevel())
-            newLevel = owner->getLevel();
+        else if (newLevel > owner->GetLevel())
+            newLevel = owner->GetLevel();
 
         pet->GivePetLevel(newLevel);
         return true;

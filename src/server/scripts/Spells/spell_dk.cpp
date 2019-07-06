@@ -251,7 +251,7 @@ class spell_dk_blood_boil : public SpellScriptLoader
 
             bool Load() override
             {
-                return GetCaster()->GetTypeId() == TYPEID_PLAYER && GetCaster()->getClass() == CLASS_DEATH_KNIGHT;
+                return GetCaster()->GetTypeId() == TYPEID_PLAYER && GetCaster()->GetClass() == CLASS_DEATH_KNIGHT;
             }
 
             void HandleAfterHit()
@@ -460,7 +460,7 @@ class spell_dk_death_gate : public SpellScriptLoader
 
             SpellCastResult CheckClass()
             {
-                if (GetCaster()->getClass() != CLASS_DEATH_KNIGHT)
+                if (GetCaster()->GetClass() != CLASS_DEATH_KNIGHT)
                 {
                     SetCustomCastResultMessage(SPELL_CUSTOM_ERROR_MUST_BE_DEATH_KNIGHT);
                     return SPELL_FAILED_CUSTOM_ERROR;

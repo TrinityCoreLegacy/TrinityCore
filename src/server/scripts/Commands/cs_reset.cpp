@@ -91,10 +91,10 @@ public:
 
     static bool HandleResetStatsOrLevelHelper(Player* player)
     {
-        ChrClassesEntry const* classEntry = sChrClassesStore.LookupEntry(player->getClass());
+        ChrClassesEntry const* classEntry = sChrClassesStore.LookupEntry(player->GetClass());
         if (!classEntry)
         {
-            TC_LOG_ERROR("misc", "Class %u not found in DBC (Wrong DBC files?)", player->getClass());
+            TC_LOG_ERROR("misc", "Class %u not found in DBC (Wrong DBC files?)", player->GetClass());
             return false;
         }
 
@@ -130,10 +130,10 @@ public:
         if (!HandleResetStatsOrLevelHelper(target))
             return false;
 
-        uint8 oldLevel = target->getLevel();
+        uint8 oldLevel = target->GetLevel();
 
         // set starting level
-        uint32 startLevel = target->getClass() != CLASS_DEATH_KNIGHT
+        uint32 startLevel = target->GetClass() != CLASS_DEATH_KNIGHT
             ? sWorld->getIntConfig(CONFIG_START_PLAYER_LEVEL)
             : sWorld->getIntConfig(CONFIG_START_DEATH_KNIGHT_PLAYER_LEVEL);
 

@@ -137,7 +137,7 @@ class spell_pal_ardent_defender : public SpellScriptLoader
                     uint32 defenseSkillValue = victim->GetDefenseSkillValue();
                     // Max heal when defense skill denies critical hits from raid bosses
                     // Formula: max defense at level + 140 (raiting from gear)
-                    uint32 reqDefForMaxHeal  = victim->getLevel() * 5 + 140;
+                    uint32 reqDefForMaxHeal  = victim->GetLevel() * 5 + 140;
                     float pctFromDefense = (defenseSkillValue >= reqDefForMaxHeal)
                         ? 1.0f
                         : float(defenseSkillValue) / float(reqDefForMaxHeal);
@@ -309,7 +309,7 @@ class spell_pal_blessing_of_faith : public SpellScriptLoader
                 if (Unit* unitTarget = GetHitUnit())
                 {
                     uint32 spell_id = 0;
-                    switch (unitTarget->getClass())
+                    switch (unitTarget->GetClass())
                     {
                         case CLASS_DRUID:
                             spell_id = SPELL_PALADIN_BLESSING_OF_LOWER_CITY_DRUID;
@@ -1114,7 +1114,7 @@ class spell_pal_shield_of_the_righteous : public SpellScriptLoader
                 if (GetCaster()->GetTypeId() != TYPEID_PLAYER)
                     return false;
 
-                if (GetCaster()->ToPlayer()->getClass() != CLASS_PALADIN)
+                if (GetCaster()->ToPlayer()->GetClass() != CLASS_PALADIN)
                     return false;
 
                 return true;
@@ -1168,7 +1168,7 @@ class spell_pal_templar_s_verdict : public SpellScriptLoader
                 if (GetCaster()->GetTypeId() != TYPEID_PLAYER)
                     return false;
 
-                if (GetCaster()->ToPlayer()->getClass() != CLASS_PALADIN)
+                if (GetCaster()->ToPlayer()->GetClass() != CLASS_PALADIN)
                     return false;
 
                 return true;

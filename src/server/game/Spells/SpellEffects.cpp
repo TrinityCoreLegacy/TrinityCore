@@ -383,7 +383,7 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
                     case 51963:
                     {
                         // about +4 base spell dmg per level
-                        damage = (m_caster->getLevel() - 60) * 4 + 60;
+                        damage = (m_caster->GetLevel() - 60) * 4 + 60;
                         break;
                     }
                 }
@@ -1480,15 +1480,15 @@ void Spell::EffectEnergize(SpellEffIndex effIndex)
     switch (m_spellInfo->Id)
     {
         case 9512:                                          // Restore Energy
-            level_diff = m_caster->getLevel() - 40;
+            level_diff = m_caster->GetLevel() - 40;
             level_multiplier = 2;
             break;
         case 24571:                                         // Blood Fury
-            level_diff = m_caster->getLevel() - 60;
+            level_diff = m_caster->GetLevel() - 60;
             level_multiplier = 10;
             break;
         case 24532:                                         // Burst of Energy
-            level_diff = m_caster->getLevel() - 60;
+            level_diff = m_caster->GetLevel() - 60;
             level_multiplier = 4;
             break;
         case 31930:                                         // Judgements of the Wise
@@ -2290,7 +2290,7 @@ void Spell::EffectLearnSkill(SpellEffIndex effIndex)
         return;
 
     uint32 skillid = m_spellInfo->Effects[effIndex].MiscValue;
-    SkillRaceClassInfoEntry const* rcEntry = GetSkillRaceClassInfo(skillid, unitTarget->getRace(), unitTarget->getClass());
+    SkillRaceClassInfoEntry const* rcEntry = GetSkillRaceClassInfo(skillid, unitTarget->getRace(), unitTarget->GetClass());
     if (!rcEntry)
         return;
 
@@ -2554,7 +2554,7 @@ void Spell::EffectTameCreature(SpellEffIndex /*effIndex*/)
     if (creatureTarget->IsPet())
         return;
 
-    if (m_caster->getClass() != CLASS_HUNTER)
+    if (m_caster->GetClass() != CLASS_HUNTER)
         return;
 
     // cast finish successfully
@@ -2568,7 +2568,7 @@ void Spell::EffectTameCreature(SpellEffIndex /*effIndex*/)
     // "kill" original creature
     creatureTarget->DespawnOrUnsummon();
 
-    uint8 level = (creatureTarget->getLevel() < (m_caster->getLevel() - 5)) ? (m_caster->getLevel() - 5) : creatureTarget->getLevel();
+    uint8 level = (creatureTarget->GetLevel() < (m_caster->GetLevel() - 5)) ? (m_caster->GetLevel() - 5) : creatureTarget->GetLevel();
 
     // prepare visual effect for levelup
     pet->SetUInt32Value(UNIT_FIELD_LEVEL, level - 1);
@@ -3555,7 +3555,7 @@ void Spell::EffectDuel(SpellEffIndex effIndex)
     PhasingHandler::InheritPhaseShift(pGameObj, m_caster);
 
     pGameObj->SetFaction(m_caster->GetFaction());
-    pGameObj->SetUInt32Value(GAMEOBJECT_LEVEL, m_caster->getLevel()+1);
+    pGameObj->SetUInt32Value(GAMEOBJECT_LEVEL, m_caster->GetLevel()+1);
     int32 duration = m_spellInfo->GetDuration();
     pGameObj->SetRespawnTime(duration > 0 ? duration/IN_MILLISECONDS : 0);
     pGameObj->SetSpellId(m_spellInfo->Id);
@@ -3695,7 +3695,7 @@ void Spell::EffectApplyGlyph(SpellEffIndex effIndex)
         case 8: minLevel = 75; break;
     }
 
-    if (minLevel && m_caster->getLevel() < minLevel)
+    if (minLevel && m_caster->GetLevel() < minLevel)
     {
         SendCastResult(SPELL_FAILED_GLYPH_SOCKET_LOCKED);
         return;
@@ -3915,7 +3915,7 @@ void Spell::EffectSummonObject(SpellEffIndex effIndex)
 
     PhasingHandler::InheritPhaseShift(go, m_caster);
 
-    //pGameObj->SetUInt32Value(GAMEOBJECT_LEVEL, m_caster->getLevel());
+    //pGameObj->SetUInt32Value(GAMEOBJECT_LEVEL, m_caster->GetLevel());
     int32 duration = m_spellInfo->GetDuration();
     go->SetRespawnTime(duration > 0 ? duration/IN_MILLISECONDS : 0);
     go->SetSpellId(m_spellInfo->Id);
@@ -4183,7 +4183,7 @@ void Spell::EffectSkinning(SpellEffIndex /*effIndex*/)
         return;
 
     Creature* creature = unitTarget->ToCreature();
-    int32 targetLevel = creature->getLevel();
+    int32 targetLevel = creature->GetLevel();
 
     uint32 skill = creature->GetCreatureTemplate()->GetRequiredLootSkill();
 
@@ -4674,7 +4674,7 @@ void Spell::EffectTransmitted(SpellEffIndex effIndex)
 
     pGameObj->SetOwnerGUID(m_caster->GetGUID());
 
-    //pGameObj->SetUInt32Value(GAMEOBJECT_LEVEL, m_caster->getLevel());
+    //pGameObj->SetUInt32Value(GAMEOBJECT_LEVEL, m_caster->GetLevel());
     pGameObj->SetSpellId(m_spellInfo->Id);
 
     ExecuteLogEffectSummonObject(effIndex, pGameObj);
@@ -4690,7 +4690,7 @@ void Spell::EffectTransmitted(SpellEffIndex effIndex)
         PhasingHandler::InheritPhaseShift(linkedTrap, m_caster);
 
         linkedTrap->SetRespawnTime(duration > 0 ? duration/IN_MILLISECONDS : 0);
-        //linkedTrap->SetUInt32Value(GAMEOBJECT_LEVEL, m_caster->getLevel());
+        //linkedTrap->SetUInt32Value(GAMEOBJECT_LEVEL, m_caster->GetLevel());
         linkedTrap->SetSpellId(m_spellInfo->Id);
         linkedTrap->SetOwnerGUID(m_caster->GetGUID());
 
@@ -4978,7 +4978,7 @@ void Spell::EffectActivateRune(SpellEffIndex effIndex)
 
     Player* player = m_caster->ToPlayer();
 
-    if (player->getClass() != CLASS_DEATH_KNIGHT)
+    if (player->GetClass() != CLASS_DEATH_KNIGHT)
         return;
 
     // needed later
@@ -5039,7 +5039,7 @@ void Spell::EffectCreateTamedPet(SpellEffIndex effIndex)
     if (effectHandleMode != SPELL_EFFECT_HANDLE_HIT_TARGET)
         return;
 
-    if (!unitTarget || unitTarget->GetTypeId() != TYPEID_PLAYER || unitTarget->GetPetGUID() || unitTarget->getClass() != CLASS_HUNTER)
+    if (!unitTarget || unitTarget->GetTypeId() != TYPEID_PLAYER || unitTarget->GetPetGUID() || unitTarget->GetClass() != CLASS_HUNTER)
         return;
 
     uint32 creatureEntry = m_spellInfo->Effects[effIndex].MiscValue;
@@ -5149,7 +5149,7 @@ void Spell::SummonGuardian(uint32 i, uint32 entry, SummonPropertiesEntry const* 
         caster = caster->ToTotem()->GetOwner();
 
     // in another case summon new
-    uint8 level = caster->getLevel();
+    uint8 level = caster->GetLevel();
 
     // level of pet summoned using engineering item based at engineering skill level
     if (m_CastItem && caster->GetTypeId() == TYPEID_PLAYER)

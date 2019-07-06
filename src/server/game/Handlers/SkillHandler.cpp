@@ -116,7 +116,7 @@ void WorldSession::HandleUnlearnSkillOpcode(WorldPacket& recvData)
     uint32 skillId;
     recvData >> skillId;
 
-    SkillRaceClassInfoEntry const* rcEntry = GetSkillRaceClassInfo(skillId, GetPlayer()->getRace(), GetPlayer()->getClass());
+    SkillRaceClassInfoEntry const* rcEntry = GetSkillRaceClassInfo(skillId, GetPlayer()->getRace(), GetPlayer()->GetClass());
     if (!rcEntry || !(rcEntry->Flags & SKILL_FLAG_UNLEARNABLE))
         return;
 
