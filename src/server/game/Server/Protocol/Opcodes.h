@@ -1405,7 +1405,7 @@ enum PacketProcessing
     PROCESS_THREADSAFE                                      //packet is thread-safe - process it in Map::Update()
 };
 
-class WorldSession;
+class WorldPacket;
 class WorldSession;
 
 class OpcodeHandler
