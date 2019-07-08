@@ -127,11 +127,13 @@ public:
 
     struct boss_high_prophet_barimAI : public BossAI
     {
-        boss_high_prophet_barimAI(Creature* creature) : BossAI(creature, DATA_HIGH_PROPHET_BARIM) { }
-
-        void Reset() override
+        boss_high_prophet_barimAI(Creature* creature) : BossAI(creature, DATA_HIGH_PROPHET_BARIM)
         {
-            _Reset();
+            Initialize();
+        }
+
+        void Initialize()
+        {
             _repentanceStarted = false;
         }
 

@@ -96,14 +96,22 @@ public:
 
     struct boss_rajhAI : public BossAI
     {
-        boss_rajhAI(Creature* creature) : BossAI(creature, DATA_RAJH) { }
+        boss_rajhAI(Creature* creature) : BossAI(creature, DATA_RAJH)
+        {
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            _energized = true;
+            _achievementEnabled = true;
+            _randomTimerCase = 0;
+            me->SetReactState(REACT_PASSIVE);
+        }
 
         void Reset() override
         {
             _Reset();
-            _energized = true;
-            _achievementEnabled = true;
-            me->SetReactState(REACT_PASSIVE);
             me->SetPower(POWER_ENERGY, 100);
             MakeInterruptable(false);
         }
