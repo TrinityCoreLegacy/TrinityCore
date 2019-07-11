@@ -417,6 +417,27 @@ class spell_item_dementia : public SpellScriptLoader
         }
 };
 
+// 24590 - Brittle Armor
+enum BrittleArmor
+{
+    SPELL_BRITTLE_ARMOR = 24575
+};
+
+class spell_item_brittle_armor : public SpellScript
+{
+    PrepareSpellScript(spell_item_brittle_armor);
+
+    void HandleScript(SpellEffIndex /* effIndex */)
+    {
+        GetHitUnit()->RemoveAuraFromStack(SPELL_BRITTLE_ARMOR);
+    }
+
+    void Register() override
+    {
+        OnEffectHitTarget += SpellEffectFn(spell_item_brittle_armor::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
+    }
+};
+
 // 64411 - Blessing of Ancient Kings (Val'anyr, Hammer of Ancient Kings)
 enum BlessingOfAncientKings
 {
@@ -1377,6 +1398,27 @@ class spell_item_mark_of_conquest : public SpellScriptLoader
         {
             return new spell_item_mark_of_conquest_AuraScript();
         }
+};
+
+// 26465 - Mercurial Shield
+enum MercurialShield
+{
+    SPELL_MERCURIAL_SHIELD = 26464
+};
+
+class spell_item_mercurial_shield : public SpellScript
+{
+    PrepareSpellScript(spell_item_mercurial_shield);
+
+    void HandleScript(SpellEffIndex /* effIndex */)
+    {
+        GetHitUnit()->RemoveAuraFromStack(SPELL_MERCURIAL_SHIELD);
+    }
+
+    void Register() override
+    {
+        OnEffectHitTarget += SpellEffectFn(spell_item_mercurial_shield::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
+    }
 };
 
 // http://www.wowhead.com/item=32686 Mingo's Fortune Giblets
@@ -4877,6 +4919,7 @@ void AddSC_item_spell_scripts()
     new spell_item_anger_capacitor<7>("spell_item_tiny_abomination_in_a_jar_hero");
     new spell_item_aura_of_madness();
     new spell_item_dementia();
+    RegisterSpellScript(spell_item_brittle_armor);
     new spell_item_blessing_of_ancient_kings();
     RegisterAuraScript(spell_item_valanyr_hammer_of_ancient_kings);
     new spell_item_deadly_precision();
@@ -4901,6 +4944,7 @@ void AddSC_item_spell_scripts()
     new spell_item_crystal_spire_of_karabor();
     new spell_item_make_a_wish();
     new spell_item_mark_of_conquest();
+    RegisterSpellScript(spell_item_mercurial_shield);
     new spell_item_mingos_fortune_generator();
     new spell_item_necrotic_touch();
     new spell_item_net_o_matic();
