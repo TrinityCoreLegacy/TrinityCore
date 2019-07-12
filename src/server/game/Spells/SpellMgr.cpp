@@ -3564,7 +3564,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Summon Frigid Bones
     ApplySpellFix({ 53525 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->DurationEntry = spellInfo->DurationEntry = sSpellDurationStore.LookupEntry(4); // 2 minutes
+        spellInfo->DurationEntry = sSpellDurationStore.LookupEntry(4); // 2 minutes
     });
 
     //
