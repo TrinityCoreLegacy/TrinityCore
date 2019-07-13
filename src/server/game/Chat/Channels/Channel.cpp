@@ -203,7 +203,7 @@ void Channel::JoinChannel(Player* player, std::string const& pass)
         return;
     }
 
-    if (!_channelPassword.empty() && pass != _channelPassword)
+    if (!CheckPassword(pass))
     {
         WrongPasswordAppend appender;
         ChannelNameBuilder<WrongPasswordAppend> builder(this, appender);
