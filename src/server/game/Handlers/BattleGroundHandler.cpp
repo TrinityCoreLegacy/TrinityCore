@@ -158,8 +158,17 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
             return;
         }
 
-        // check Deserter debuff
+        // check RBAC permissions
         if (!_player->CanJoinToBattleground(bg))
+        {
+            WorldPacket data;
+            sBattlegroundMgr->BuildStatusFailedPacket(&data, bg, _player, 0, ERR_BATTLEGROUND_JOIN_TIMED_OUT);
+            GetPlayer()->SendDirectMessage(&data);
+            return;
+        }
+
+        // check Deserter debuff
+        if (_player->IsDeserter())
         {
             WorldPacket data;
             sBattlegroundMgr->BuildStatusFailedPacket(&data, bg, _player, 0, ERR_GROUP_JOIN_BATTLEGROUND_DESERTERS);
@@ -181,6 +190,14 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
             // player is already in queue, can't start random queue
             WorldPacket data;
             sBattlegroundMgr->BuildStatusFailedPacket(&data, bg, _player, 0, ERR_IN_NON_RANDOM_BG);
+            _player->SendDirectMessage(&data);
+            return;
+        }
+
+        if (!_player->CanJoinToBattleground(bg))
+        {
+            WorldPacket data;
+            sBattlegroundMgr->BuildStatusFailedPacket(&data, bg, _player, 0, ERR_BATTLEGROUND_JOIN_FAILED);
             _player->SendDirectMessage(&data);
             return;
         }
@@ -507,7 +524,7 @@ void WorldSession::HandleBattleFieldPortOpcode(WorldPacket &recvData)
     if (action == 1 && ginfo.ArenaType == 0)
     {
         //if player is trying to enter battleground (not arena!) and he has deserter debuff, we must just remove him from queue
-        if (!_player->CanJoinToBattleground(bg))
+        if (_player->IsDeserter())
         {
             //send bg command result to show nice message
             WorldPacket data2;

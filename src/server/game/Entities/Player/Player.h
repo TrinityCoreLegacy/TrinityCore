@@ -2047,6 +2047,7 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         }
 
         bool InBattlegroundQueue() const;
+        bool IsDeserter() const { return HasAura(26013); }
 
         BattlegroundQueueTypeId GetBattlegroundQueueTypeId(uint32 index) const;
         uint32 GetBattlegroundQueueIndex(BattlegroundQueueTypeId bgQueueTypeId) const;
