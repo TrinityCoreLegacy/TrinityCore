@@ -521,7 +521,7 @@ void GameObject::Update(uint32 diff)
                                 SetRespawnTime(WEEK);
                             else
                                 m_respawnTime = (now > linkedRespawntime ? now : linkedRespawntime) + urand(5, MINUTE); // else copy time from master and add a little
-                            SaveRespawnTime(); // also save to DB immediately
+                            SaveRespawnTime();
                             return;
                         }
 
@@ -587,7 +587,7 @@ void GameObject::Update(uint32 diff)
 
             // Set respawn timer
             if (!m_respawnCompatibilityMode && m_respawnTime > 0)
-                SaveRespawnTime(0, false);
+                SaveRespawnTime();
 
             if (isSpawned())
             {
@@ -809,22 +809,12 @@ void GameObject::Update(uint32 diff)
 
             // if option not set then object will be saved at grid unload
             // Otherwise just save respawn time to map object memory
-            if (sWorld->getBoolConfig(CONFIG_SAVE_RESPAWN_TIME_IMMEDIATELY))
-                SaveRespawnTime();
+            SaveRespawnTime();
 
-            if (!m_respawnCompatibilityMode)
-            {
-                // Respawn time was just saved if set to save to DB
-                // If not, we save only to map memory
-                if (!sWorld->getBoolConfig(CONFIG_SAVE_RESPAWN_TIME_IMMEDIATELY))
-                    SaveRespawnTime(0, false);
-
-                // Then despawn
+            if (m_respawnCompatibilityMode)
+                DestroyForNearbyPlayers();
+            else
                 AddObjectToRemoveList();
-                return;
-            }
-
-            DestroyForNearbyPlayers(); // old UpdateObjectVisibility()
 
             break;
         }
@@ -1172,7 +1162,7 @@ Unit* GameObject::GetOwner() const
     return ObjectAccessor::GetUnit(*this, GetOwnerGUID());
 }
 
-void GameObject::SaveRespawnTime(uint32 forceDelay, bool savetodb)
+void GameObject::SaveRespawnTime(uint32 forceDelay)
 {
     if (m_goData && (forceDelay || m_respawnTime > GameTime::GetGameTime()) && m_spawnedByDefault)
     {
@@ -1183,7 +1173,7 @@ void GameObject::SaveRespawnTime(uint32 forceDelay, bool savetodb)
         }
 
         uint32 thisRespawnTime = forceDelay ? time(nullptr) + forceDelay : m_respawnTime;
-        GetMap()->SaveRespawnTime(SPAWN_TYPE_GAMEOBJECT, m_spawnId, GetEntry(), thisRespawnTime, GetZoneId(), Trinity::ComputeGridCoord(GetPositionX(), GetPositionY()).GetId(), m_goData->dbData ? savetodb : false);
+        GetMap()->SaveRespawnTime(SPAWN_TYPE_GAMEOBJECT, m_spawnId, GetEntry(), thisRespawnTime, GetZoneId(), Trinity::ComputeGridCoord(GetPositionX(), GetPositionY()).GetId());
     }
 }
 
