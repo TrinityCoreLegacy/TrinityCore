@@ -2071,7 +2071,7 @@ void SpellMgr::LoadSpellAreas()
         spellArea.questEndStatus      = fields[4].GetUInt32();
         spellArea.questEnd            = fields[5].GetUInt32();
         spellArea.auraSpell           = fields[6].GetInt32();
-        spellArea.raceMask.RawValue   = fields[7].GetUInt64();
+        spellArea.raceMask.RawValue   = fields[7].GetUInt32();
         spellArea.gender              = Gender(fields[8].GetUInt8());
         spellArea.flags               = fields[9].GetUInt8();
 
