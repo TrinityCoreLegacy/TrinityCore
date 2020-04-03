@@ -40,6 +40,7 @@
 #include "UpdateData.h"
 #include "World.h"
 #include "WorldSession.h"
+#include <sstream>
 
 void AddItemsSetItem(Player* player, Item* item)
 {

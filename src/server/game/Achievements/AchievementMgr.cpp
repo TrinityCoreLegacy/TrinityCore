@@ -34,6 +34,7 @@
 #include "ObjectMgr.h"
 #include "World.h"
 #include "WorldSession.h"
+#include <sstream>
 
 struct VisibleAchievementCheck
 {
