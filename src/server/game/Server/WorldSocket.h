@@ -20,10 +20,10 @@
 #define __WORLDSOCKET_H__
 
 #include "Common.h"
+#include "AsyncCallbackProcessor.h"
 #include "BigNumber.h"
 #include "DatabaseEnvFwd.h"
 #include "MessageBuffer.h"
-#include "QueryCallbackProcessor.h"
 #include "Socket.h"
 #include "WorldPacketCrypt.h"
 #include "MPSCQueue.h"
