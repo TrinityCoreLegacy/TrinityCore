@@ -5974,6 +5974,7 @@ SpellCastResult Spell::CheckCasterAuras(uint32* param1) const
         }
         else if (!CheckSpellCancelsConfuse(param1))
             result = SPELL_FAILED_CONFUSED;
+    }
     else if (m_caster->HasFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_NO_ACTIONS) && m_spellInfo->PreventionType & SPELL_PREVENTION_TYPE_NO_ACTIONS && !CheckSpellCancelsNoActions(param1))
         result = SPELL_FAILED_NO_ACTIONS;
 
