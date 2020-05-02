@@ -36,6 +36,7 @@ SET(_OPENSSL_ROOT_HINTS
 IF(PLATFORM EQUAL 64)
   SET(_OPENSSL_ROOT_PATHS
     "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\OpenSSL (64-bit)_is1;InstallLocation]"
+    "C:/Program Files/OpenSSL-Win64/"
     "C:/OpenSSL-Win64/"
     "C:/OpenSSL/"
   )
@@ -43,6 +44,8 @@ ELSE()
   SET(_OPENSSL_ROOT_PATHS
     "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\OpenSSL (32-bit)_is1;InstallLocation]"
     "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\OpenSSL (32-bit)_is1;InstallLocation]"
+    "C:/Program Files/OpenSSL-Win32/"
+    "C:/OpenSSL-Win32/"
     "C:/OpenSSL/"
   )
 ENDIF()
@@ -230,7 +233,7 @@ if (OPENSSL_INCLUDE_DIR)
   include(EnsureVersion)
   ENSURE_VERSION_RANGE("${OPENSSL_EXPECTED_VERSION}" "${OPENSSL_VERSION}" "${OPENSSL_MAX_VERSION}" OPENSSL_VERSION_OK)
   if (NOT OPENSSL_VERSION_OK)
-      message(FATAL_ERROR "TrinityCore needs OpenSSL version ${OPENSSL_EXPECTED_VERSION} but found version ${OPENSSL_VERSION}")
+      message(FATAL_ERROR "LegacyCoreLegion needs OpenSSL version ${OPENSSL_EXPECTED_VERSION} but found version ${OPENSSL_VERSION}")
   endif()
 endif (OPENSSL_INCLUDE_DIR)
 

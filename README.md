@@ -25,6 +25,14 @@ master | 3.3.5
 [![master Build status](https://ci.appveyor.com/api/projects/status/54d0u1fxe50ad80o/branch/master?svg=true)](https://ci.appveyor.com/project/DDuarte/trinitycore/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/54d0u1fxe50ad80o/branch/3.3.5?svg=true)](https://ci.appveyor.com/project/DDuarte/trinitycore/branch/3.3.5)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/435/badge.svg)](https://scan.coverity.com/projects/435) | [![Coverity Scan Build Status](https://scan.coverity.com/projects/4656/badge.svg)](https://scan.coverity.com/projects/4656)
 
+## Requirements
+
+Boost ≥ 1.70 (latest stable recommended)
+MySQL ≥ 5.7
+OpenSSL ≥ 1.0.x
+CMake ≥ 3.14 (latest stable recommended)
+MS Visual Studio (Community) ≥ 16.4 (2019) (Desktop)
+
 ## Introduction
 
 TrinityCore is a *MMORPG* Framework based mostly in C++.
