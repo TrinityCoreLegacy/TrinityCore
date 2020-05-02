@@ -29,8 +29,7 @@ master | 3.3.5
 
 Boost ≥ 1.70 (latest stable recommended)
 MySQL ≥ 5.7
-OpenSSL ≥ 1.0.x
-CMake ≥ 3.14 (latest stable recommended)
+OpenSSL ≥ 1.0.xCMake ≥ 3.14 (latest stable recommended)
 MS Visual Studio (Community) ≥ 16.4 (2019) (Desktop)
 
 ## Introduction
