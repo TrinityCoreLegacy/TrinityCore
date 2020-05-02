@@ -8531,7 +8531,7 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type, bool aeLooting/* = fa
         else
         {
             // exploit fix
-            if (!creature->HasDynamicFlag(UNIT_DYNFLAG_LOOTABLE))
+            if (!creature->HasFlag(CORPSE_FIELD_FLAGS, CORPSE_FLAG_SKINNABLE))
             {
                 SendLootError(loot->GetGUID(), guid, LOOT_ERROR_DIDNT_KILL);
                 return;
