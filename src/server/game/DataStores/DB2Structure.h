@@ -2786,7 +2786,7 @@ struct SpellVisualKitEntry
 {
     uint32 ID;
     int32 Flags;
-    int8 FallbackPriority;
+    float FallbackPriority;
     uint32 FallbackSpellVisualKitId;
     uint16 DelayMin;
     uint16 DelayMax;
