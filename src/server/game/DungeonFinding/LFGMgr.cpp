@@ -1617,7 +1617,7 @@ uint32 LFGMgr::GetSelectedRandomDungeon(ObjectGuid guid)
     return 0;
 }
 
-LfgLockMap LFGMgr::GetLockedDungeons(ObjectGuid guid)
+LfgLockMap const LFGMgr::GetLockedDungeons(ObjectGuid guid)
 {
     TC_LOG_TRACE("lfg.data.player.dungeons.locked.get", "Player: %s, LockedDungeons.", guid.ToString().c_str());
     LfgLockMap lock;

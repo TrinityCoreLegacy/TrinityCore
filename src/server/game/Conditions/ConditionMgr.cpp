@@ -3060,7 +3060,7 @@ static int32(* const WorldStateExpressionFunctions[WSE_FUNCTION_MAX])(Player con
     },
 
     // WSE_FUNCTION_UNK16
-    [](Player const* player, uint32 /*arg1*/, uint32 /*arg2*/) -> int32
+    [](Player const* /*player*/, uint32 /*arg1*/, uint32 /*arg2*/) -> int32
     {
         return 0;
     },
