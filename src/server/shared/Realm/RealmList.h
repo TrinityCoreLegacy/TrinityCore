@@ -33,6 +33,7 @@ struct RealmBuildInfo
     uint32 MinorVersion;
     uint32 BugfixVersion;
     std::array<char, 4> HotfixVersion;
+    std::array<uint8, 16> WinAuthSeed;
     std::array<uint8, 16> Win64AuthSeed;
     std::array<uint8, 16> Mac64AuthSeed;
 };
