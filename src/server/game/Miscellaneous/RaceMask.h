@@ -109,7 +109,7 @@ constexpr uint64 RACEMASK_ALL_PLAYABLE = std::integral_constant<uint64,
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_NIGHTBORNE)          |
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_HIGHMOUNTAIN_TAUREN) |
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_VOID_ELF)            |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_LIGHTFORGED_DRAENEI);
+     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_LIGHTFORGED_DRAENEI)>::value;
 
 constexpr uint64 RACEMASK_NEUTRAL = std::integral_constant<uint64, Trinity::RaceMask<uint64>::GetMaskForRace(RACE_PANDAREN_NEUTRAL)>::value;
 
@@ -122,7 +122,7 @@ constexpr uint64 RACEMASK_ALLIANCE = std::integral_constant<uint64,
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_WORGEN)              |
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_PANDAREN_ALLIANCE)   |
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_VOID_ELF)            |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_LIGHTFORGED_DRAENEI);
+     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_LIGHTFORGED_DRAENEI)>::value;
 
 constexpr uint64 RACEMASK_HORDE = std::integral_constant<uint64, RACEMASK_ALL_PLAYABLE & ~(RACEMASK_NEUTRAL | RACEMASK_ALLIANCE)>::value;
 
