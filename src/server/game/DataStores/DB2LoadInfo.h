@@ -5449,7 +5449,7 @@ struct WorldStateExpressionLoadInfo
     {
         static DB2FieldMeta const fields[] =
         {
-            { false, FT_INT, "ID" },
+            { true, FT_INT, "ID" },
             { false, FT_STRING_NOT_LOCALIZED, "Expression" },
         };
         static DB2LoadInfo const loadInfo(&fields[0], std::extent<decltype(fields)>::value, WorldStateExpressionMeta::Instance(), HOTFIX_SEL_WORLD_STATE_EXPRESSION);

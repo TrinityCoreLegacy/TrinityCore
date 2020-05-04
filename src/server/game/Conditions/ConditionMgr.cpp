@@ -2999,10 +2999,10 @@ static int32(* const WorldStateExpressionFunctions[WSE_FUNCTION_MAX])(Player con
         return player->GetMap()->GetDifficultyID();
     },
 
-    // WSE_FUNCTION_WAR_MODE_ACTIVE
+    // WSE_FUNCTION_UNK16
     [](Player const* player, uint32 /*arg1*/, uint32 /*arg2*/) -> int32
     {
-        return player->HasPlayerFlag(PLAYER_FLAGS_WAR_MODE_ACTIVE);
+        return 0;
     },
 
     // WSE_FUNCTION_UNK17
