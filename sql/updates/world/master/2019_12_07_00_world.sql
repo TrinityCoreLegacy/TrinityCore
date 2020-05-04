@@ -4,7 +4,7 @@ INSERT INTO `terrain_swap_defaults` (`MapId`, `TerrainSwapMap`, `Comment`) VALUE
 (1, 1817, 'Silithus: The Wound');
 
 DELETE FROM `terrain_worldmap` WHERE `TerrainSwapMap` = 1817;
-INSERT INTO `terrain_worldmap` (`TerrainSwapMap`, `UiMapPhaseId`, `Comment`) VALUES 
+INSERT INTO `terrain_worldmap` (`TerrainSwapMap`, `WorldMapArea`, `Comment`) VALUES 
 (1817, 9491, 'Silithus: The Wound');
 
 DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 25 AND `SourceEntry` = 1817;
