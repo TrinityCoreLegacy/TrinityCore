@@ -54,13 +54,13 @@ enum Races
     RACE_HIGHMOUNTAIN_TAUREN    = 28,
     RACE_VOID_ELF               = 29,
     RACE_LIGHTFORGED_DRAENEI    = 30,
-    RACE_ZANDALARI_TROLL        = 31,
-    RACE_KUL_TIRAN              = 32,
+    //RACE_ZANDALARI_TROLL        = 31,
+    //RACE_KUL_TIRAN              = 32,
     //RACE_THIN_HUMAN           = 33,
-    RACE_DARK_IRON_DWARF        = 34, // RaceMask bit 11
-    RACE_VULPERA                = 35, // RaceMask bit 12
-    RACE_MAGHAR_ORC             = 36, // RaceMask bit 13
-    RACE_MECHAGNOME             = 37  // RaceMask bit 14
+    //RACE_DARK_IRON_DWARF        = 34, // RaceMask bit 11
+   // RACE_VULPERA                = 35, // RaceMask bit 12
+    //RACE_MAGHAR_ORC             = 36, // RaceMask bit 13
+    //RACE_MECHAGNOME             = 37  // RaceMask bit 14
 };
 
 // max+1 for player race
@@ -121,13 +121,13 @@ constexpr uint64 RACEMASK_ALL_PLAYABLE =
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_NIGHTBORNE)          |
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_HIGHMOUNTAIN_TAUREN) |
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_VOID_ELF)            |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_LIGHTFORGED_DRAENEI) |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_ZANDALARI_TROLL)     |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_KUL_TIRAN)           |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_DARK_IRON_DWARF)     |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_VULPERA)             |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_MAGHAR_ORC)          |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_MECHAGNOME);
+     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_LIGHTFORGED_DRAENEI);
+     //Trinity::RaceMask<uint64>::GetMaskForRace(RACE_ZANDALARI_TROLL)     |
+     //Trinity::RaceMask<uint64>::GetMaskForRace(RACE_KUL_TIRAN)           |
+     //Trinity::RaceMask<uint64>::GetMaskForRace(RACE_DARK_IRON_DWARF)     |
+     //Trinity::RaceMask<uint64>::GetMaskForRace(RACE_VULPERA)             |
+     //Trinity::RaceMask<uint64>::GetMaskForRace(RACE_MAGHAR_ORC)          |
+     //Trinity::RaceMask<uint64>::GetMaskForRace(RACE_MECHAGNOME);
 
 constexpr uint64 RACEMASK_NEUTRAL = Trinity::RaceMask<uint64>::GetMaskForRace(RACE_PANDAREN_NEUTRAL);
 
@@ -140,10 +140,10 @@ constexpr uint64 RACEMASK_ALLIANCE =
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_WORGEN)              |
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_PANDAREN_ALLIANCE)   |
      Trinity::RaceMask<uint64>::GetMaskForRace(RACE_VOID_ELF)            |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_LIGHTFORGED_DRAENEI) |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_KUL_TIRAN)           |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_DARK_IRON_DWARF)     |
-     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_MECHAGNOME);
+     Trinity::RaceMask<uint64>::GetMaskForRace(RACE_LIGHTFORGED_DRAENEI);
+     //Trinity::RaceMask<uint64>::GetMaskForRace(RACE_KUL_TIRAN)           |
+     //Trinity::RaceMask<uint64>::GetMaskForRace(RACE_DARK_IRON_DWARF)     |
+     //Trinity::RaceMask<uint64>::GetMaskForRace(RACE_MECHAGNOME);
 
 constexpr uint64 RACEMASK_HORDE = RACEMASK_ALL_PLAYABLE & ~(RACEMASK_NEUTRAL | RACEMASK_ALLIANCE);
 

@@ -68,8 +68,8 @@ void RealmList::Close()
 
 void RealmList::LoadBuildInfo()
 {
-    //                                                              0             1              2              3      4              5        6          7
-    if (QueryResult result = LoginDatabase.Query("SELECT majorVersion, minorVersion, bugfixVersion, hotfixVersion, build, win64AuthSeed, winAuthSeed, mac64AuthSeed FROM build_info ORDER BY build ASC"))
+    //                                                              0             1              2              3      4          5        6          7
+    if (QueryResult result = LoginDatabase.Query("SELECT majorVersion, minorVersion, bugfixVersion, hotfixVersion, build, winAuthSeed, win64AuthSeed, mac64AuthSeed FROM build_info ORDER BY build ASC"))
     {
         do
         {
@@ -246,7 +246,6 @@ RealmBuildInfo const* RealmList::GetBuildInfo(uint32 build) const
     for (RealmBuildInfo const& clientBuild : _builds)
         if (clientBuild.Build == build)
             return &clientBuild;
-
 
     return nullptr;
 }

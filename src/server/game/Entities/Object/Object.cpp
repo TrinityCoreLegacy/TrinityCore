@@ -51,6 +51,7 @@
 #include "World.h"
 #include "WorldSession.h"
 #include <G3D/Vector3.h>
+#include <sstream>
 
 constexpr float VisibilityDistances[AsUnderlyingType(VisibilityDistanceType::Max)] =
 {
