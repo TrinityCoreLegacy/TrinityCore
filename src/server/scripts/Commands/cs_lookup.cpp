@@ -1528,7 +1528,7 @@ public:
                 do
                 {
                     Field* characterFields  = result2->Fetch();
-                    ObjectGuid::LowType guid = characterFields[0].GetUInt32();
+                    ObjectGuid::LowType guid = characterFields[0].GetUInt64();
                     std::string name        = characterFields[1].GetString();
                     uint8 online = characterFields[2].GetUInt8();
 

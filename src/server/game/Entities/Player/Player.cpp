@@ -16921,7 +16921,7 @@ void Player::_LoadEquipmentSets(PreparedQueryResult result)
         eqSet.State           = EQUIPMENT_SET_UNCHANGED;
 
         for (uint32 i = 0; i < EQUIPMENT_SLOT_END; ++i)
-            if (ObjectGuid::LowType guid = fields[5 + i].GetUInt32())
+            if (ObjectGuid::LowType guid = fields[5 + i].GetUInt64())
                 eqSet.Data.Pieces[i] = ObjectGuid::Create<HighGuid::Item>(guid);
 
         if (eqSet.Data.SetID >= MAX_EQUIPMENT_SET_INDEX)    // client limit

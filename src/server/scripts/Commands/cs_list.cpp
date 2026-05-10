@@ -188,10 +188,10 @@ public:
             do
             {
                 Field* fields           = result->Fetch();
-                uint32 itemGuid         = fields[0].GetUInt32();
+                uint64 itemGuid         = fields[0].GetUInt64();
                 uint32 itemBag          = fields[1].GetUInt32();
-                uint8 itemSlot          = fields[2].GetUInt8();
-                uint32 ownerGuid        = fields[3].GetUInt32();
+                uint32 itemSlot         = fields[2].GetUInt8();
+                uint64 ownerGuid        = fields[3].GetUInt64();
                 uint32 ownerAccountId   = fields[4].GetUInt32();
                 std::string ownerName   = fields[5].GetString();
 
@@ -244,7 +244,7 @@ public:
                 Field* fields                   = result->Fetch();
                 ObjectGuid::LowType itemGuid                 = fields[0].GetUInt64();
                 ObjectGuid::LowType itemSender               = fields[1].GetUInt64();
-                uint32 itemReceiver             = fields[2].GetUInt32();
+                uint64 itemReceiver             = fields[2].GetUInt64();
                 uint32 itemSenderAccountId      = fields[3].GetUInt32();
                 std::string itemSenderName      = fields[4].GetString();
                 uint32 itemReceiverAccount      = fields[5].GetUInt32();
@@ -289,8 +289,8 @@ public:
             do
             {
                 Field* fields           = result->Fetch();
-                uint32 itemGuid         = fields[0].GetUInt32();
-                uint32 owner            = fields[1].GetUInt32();
+                uint64 itemGuid         = fields[0].GetUInt64();
+                uint64 owner            = fields[1].GetUInt64();
                 uint32 ownerAccountId   = fields[2].GetUInt32();
                 std::string ownerName   = fields[3].GetString();
 
@@ -321,8 +321,8 @@ public:
             do
             {
                 Field* fields = result->Fetch();
-                uint32 itemGuid = fields[0].GetUInt32();
-                uint32 guildGuid = fields[1].GetUInt32();
+                uint64 itemGuid = fields[0].GetUInt64();
+                uint64 guildGuid = fields[1].GetUInt64();
                 std::string guildName = fields[2].GetString();
 
                 char const* itemPos = "[in guild bank]";
@@ -559,9 +559,9 @@ public:
                 {
                     Field* queryFields      = queryResult->Fetch();
                     uint32 messageId        = queryFields[0].GetUInt32();
-                    uint32 senderId         = queryFields[1].GetUInt32();
+                    uint64 senderId         = queryFields[1].GetUInt64();
                     std::string sender      = queryFields[2].GetString();
-                    uint32 receiverId       = queryFields[3].GetUInt32();
+                    uint64 receiverId       = queryFields[3].GetUInt64();
                     std::string receiver    = queryFields[4].GetString();
                     std::string subject     = queryFields[5].GetString();
                     uint64 deliverTime      = queryFields[6].GetUInt32();
@@ -585,7 +585,7 @@ public:
                         {
                             do
                             {
-                                ObjectGuid::LowType item_guid = (*result2)[0].GetUInt32();
+                                ObjectGuid::LowType item_guid = (*result2)[0].GetUInt64();
                                 stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_MAIL_LIST_ITEMS);
                                 stmt->setUInt64(0, item_guid);
                                 PreparedQueryResult result3 = CharacterDatabase.Query(stmt);

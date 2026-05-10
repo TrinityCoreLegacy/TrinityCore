@@ -244,7 +244,7 @@ public:
 private:
     std::string _AHBotIncludes;
     std::string _AHBotExcludes;
-    std::vector<uint32> _AHBotCharacters;
+    std::vector<uint64> _AHBotCharacters;
     uint32 _itemsPerCycleBoost;
     uint32 _itemsPerCycleNormal;
 

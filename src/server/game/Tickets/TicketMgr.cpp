@@ -68,7 +68,7 @@ bool GmTicket::LoadFromDB(Field* fields)
     uint8 index = 0;
     _id                 = fields[  index].GetUInt32();
     _type               = TicketType(fields[++index].GetUInt8());
-    _playerGuid         = ObjectGuid(HighGuid::Player, fields[++index].GetUInt32());
+    _playerGuid         = ObjectGuid(HighGuid::Player, fields[++index].GetUInt64());
     _playerName         = fields[++index].GetString();
     _message            = fields[++index].GetString();
     _createTime         = fields[++index].GetUInt32();
@@ -77,8 +77,8 @@ bool GmTicket::LoadFromDB(Field* fields)
     _posY               = fields[++index].GetFloat();
     _posZ               = fields[++index].GetFloat();
     _lastModifiedTime   = fields[++index].GetUInt32();
-    _closedBy           = ObjectGuid(uint64(fields[++index].GetInt32()));
-    _assignedTo         = ObjectGuid(HighGuid::Player, fields[++index].GetUInt32());
+    _closedBy           = ObjectGuid(uint64(fields[++index].GetInt64()));
+    _assignedTo         = ObjectGuid(HighGuid::Player, fields[++index].GetUInt64());
     _comment            = fields[++index].GetString();
     _response           = fields[++index].GetString();
     _completed          = fields[++index].GetBool();
@@ -105,7 +105,7 @@ void GmTicket::SaveToDB(CharacterDatabaseTransaction trans) const
     stmt->setFloat (++index, _posY);
     stmt->setFloat (++index, _posZ);
     stmt->setUInt32(++index, uint32(_lastModifiedTime));
-    stmt->setInt32 (++index, int32(_closedBy.GetCounter()));
+    stmt->setInt64 (++index, int64(_closedBy.GetCounter()));
     stmt->setUInt64(++index, _assignedTo.GetCounter());
     stmt->setString(++index, _comment);
     stmt->setString(++index, _response);
@@ -113,7 +113,7 @@ void GmTicket::SaveToDB(CharacterDatabaseTransaction trans) const
     stmt->setUInt8 (++index, uint8(_escalatedStatus));
     stmt->setBool  (++index, _viewed);
     stmt->setBool  (++index, _needMoreHelp);
-    stmt->setInt32 (++index, int32(_resolvedBy.GetCounter()));
+    stmt->setInt64 (++index, int64(_resolvedBy.GetCounter()));
 
     CharacterDatabase.ExecuteOrAppend(trans, stmt);
 }
