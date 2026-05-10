@@ -22,6 +22,11 @@
 #include "IpAddress.h"
 #include "Log.h"
 #include <boost/asio/ip/tcp.hpp>
+#include <boost/asio/co_spawn.hpp>
+#include <boost/asio/awaitable.hpp>
+#include <boost/asio/use_awaitable.hpp>
+#include <boost/asio/redirect_error.hpp>
+#include <boost/asio/detached.hpp>
 #include <atomic>
 #include <functional>
 
@@ -46,28 +51,35 @@ public:
     template<AcceptCallback acceptCallback>
     void AsyncAcceptWithCallback()
     {
-        tcp::socket* socket;
-        uint32 threadIndex;
-        std::tie(socket, threadIndex) = _socketFactory();
-        _acceptor.async_accept(*socket, [this, socket, threadIndex](boost::system::error_code error)
-        {
-            if (!error)
+        boost::asio::co_spawn(_acceptor.get_executor(),
+            [this]() -> boost::asio::awaitable<void>
             {
-                try
+                while (!_closed)
                 {
-                    socket->non_blocking(true);
+                    tcp::socket* socket;
+                    uint32 threadIndex;
+                    std::tie(socket, threadIndex) = _socketFactory();
 
-                    acceptCallback(std::move(*socket), threadIndex);
-                }
-                catch (boost::system::system_error const& err)
-                {
-                    TC_LOG_INFO("network", "Failed to initialize client's socket {}", err.what());
-                }
-            }
+                    boost::system::error_code error;
+                    co_await _acceptor.async_accept(*socket, boost::asio::redirect_error(boost::asio::use_awaitable, error));
+                    if (error)
+                    {
+                        if (error == boost::asio::error::operation_aborted)
+                            break;
+                        continue;
+                    }
 
-            if (!_closed)
-                this->AsyncAcceptWithCallback<acceptCallback>();
-        });
+                    try
+                    {
+                        socket->non_blocking(true);
+                        acceptCallback(std::move(*socket), threadIndex);
+                    }
+                    catch (boost::system::system_error const& err)
+                    {
+                        TC_LOG_INFO("network", "Failed to initialize client's socket {}", err.what());
+                    }
+                }
+            }, boost::asio::detached);
     }
 
     bool Bind()
@@ -130,25 +142,30 @@ private:
 template<class T>
 void AsyncAcceptor::AsyncAccept()
 {
-    _acceptor.async_accept(_socket, [this](boost::system::error_code error)
-    {
-        if (!error)
+    boost::asio::co_spawn(_acceptor.get_executor(),
+        [this]() -> boost::asio::awaitable<void>
         {
-            try
+            while (!_closed)
             {
-                // this-> is required here to fix an segmentation fault in gcc 4.7.2 - reason is lambdas in a templated class
-                std::make_shared<T>(std::move(this->_socket))->Start();
-            }
-            catch (boost::system::system_error const& err)
-            {
-                TC_LOG_INFO("network", "Failed to retrieve client's remote address {}", err.what());
-            }
-        }
+                boost::system::error_code error;
+                co_await _acceptor.async_accept(_socket, boost::asio::redirect_error(boost::asio::use_awaitable, error));
+                if (error)
+                {
+                    if (error == boost::asio::error::operation_aborted)
+                        break;
+                    continue;
+                }
 
-        // lets slap some more this-> on this so we can fix this bug with gcc 4.7.2 throwing internals in yo face
-        if (!_closed)
-            this->AsyncAccept<T>();
-    });
+                try
+                {
+                    std::make_shared<T>(std::move(_socket))->Start();
+                }
+                catch (boost::system::system_error const& err)
+                {
+                    TC_LOG_INFO("network", "Failed to retrieve client's remote address {}", err.what());
+                }
+            }
+        }, boost::asio::detached);
 }
 
 #endif /* __ASYNCACCEPT_H_ */

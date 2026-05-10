@@ -295,8 +295,6 @@ void AuthSession::ReadHandler()
         packet.ReadCompleted(size);
         SetTimeout();
     }
-
-    AsyncRead();
 }
 
 void AuthSession::SendPacket(ByteBuffer& packet)

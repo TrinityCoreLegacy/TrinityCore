@@ -201,12 +201,12 @@ void WorldSocket::ReadHandler()
         {
             if (result != ReadDataHandlerResult::WaitingForQuery)
                 CloseSocket();
+            else
+                SuspendRead();
 
             return;
         }
     }
-
-    AsyncRead();
 }
 
 bool WorldSocket::ReadHeaderHandler()
