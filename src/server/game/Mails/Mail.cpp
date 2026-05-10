@@ -131,7 +131,7 @@ void MailDraft::deleteIncludedItems(CharacterDatabaseTransaction trans, bool inD
         if (inDB)
         {
             CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_ITEM_INSTANCE);
-            stmt->setUInt32(0, item->GetGUID().GetCounter());
+            stmt->setUInt64(0, item->GetGUID().GetCounter());
             trans->Append(stmt);
         }
 
@@ -171,8 +171,8 @@ void MailDraft::SendReturnToSender(uint32 sender_acc, ObjectGuid::LowType sender
             item->SaveToDB(trans);                      // item not in inventory and can be save standalone
             // owner in data will set at mail receive and item extracting
             CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UPD_ITEM_OWNER);
-            stmt->setUInt32(0, receiver_guid);
-            stmt->setUInt32(1, item->GetGUID().GetCounter());
+            stmt->setUInt64(0, receiver_guid);
+            stmt->setUInt64(1, item->GetGUID().GetCounter());
             trans->Append(stmt);
         }
     }
@@ -223,8 +223,8 @@ void MailDraft::SendMailTo(CharacterDatabaseTransaction trans, MailReceiver cons
     stmt->setUInt8 (++index, uint8(sender.GetMailMessageType()));
     stmt->setInt8  (++index, int8(sender.GetStationery()));
     stmt->setUInt16(++index, GetMailTemplateId());
-    stmt->setUInt32(++index, sender.GetSenderId());
-    stmt->setUInt32(++index, receiver.GetPlayerGUIDLow());
+    stmt->setUInt64(++index, sender.GetSenderId());
+    stmt->setUInt64(++index, receiver.GetPlayerGUIDLow());
     stmt->setString(++index, GetSubject());
     stmt->setString(++index, GetBody());
     stmt->setBool  (++index, !m_items.empty());
@@ -240,8 +240,8 @@ void MailDraft::SendMailTo(CharacterDatabaseTransaction trans, MailReceiver cons
         Item* pItem = mailItemIter->second;
         stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_MAIL_ITEM);
         stmt->setUInt32(0, mailId);
-        stmt->setUInt32(1, pItem->GetGUID().GetCounter());
-        stmt->setUInt32(2, receiver.GetPlayerGUIDLow());
+        stmt->setUInt64(1, pItem->GetGUID().GetCounter());
+        stmt->setUInt64(2, receiver.GetPlayerGUIDLow());
         trans->Append(stmt);
     }
 

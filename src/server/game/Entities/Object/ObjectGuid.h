@@ -131,7 +131,7 @@ class TC_GAME_API ObjectGuid
     public:
         static ObjectGuid const Empty;
 
-        typedef uint32 LowType;
+        typedef uint64 LowType;
 
         template<HighGuid type>
         static typename std::enable_if<ObjectGuidTraits<type>::Global, ObjectGuid>::type Create(LowType counter) { return Global(type, counter); }
@@ -159,14 +159,14 @@ class TC_GAME_API ObjectGuid
         {
             return HasEntry()
                    ? LowType(_guid & UI64LIT(0x0000000000FFFFFF))
-                   : LowType(_guid & UI64LIT(0x00000000FFFFFFFF));
+                   : LowType(_guid & UI64LIT(0x0000FFFFFFFFFFFF));
         }
 
         static LowType GetMaxCounter(HighGuid high)
         {
             return HasEntry(high)
                    ? LowType(0x00FFFFFF)
-                   : LowType(0xFFFFFFFF);
+                   : LowType(UI64LIT(0x0000FFFFFFFFFFFF));
         }
 
         ObjectGuid::LowType GetMaxCounter() const { return GetMaxCounter(GetHigh()); }
@@ -251,8 +251,6 @@ class TC_GAME_API ObjectGuid
         static ObjectGuid MapSpecific(HighGuid type, uint32 entry, LowType counter);
 
         explicit ObjectGuid(uint32 const&) = delete;                 // no implementation, used to catch wrong type assignment
-        ObjectGuid(HighGuid, uint32, uint64 counter) = delete;       // no implementation, used to catch wrong type assignment
-        ObjectGuid(HighGuid, uint64 counter) = delete;               // no implementation, used to catch wrong type assignment
 
         uint64 _guid;
 };

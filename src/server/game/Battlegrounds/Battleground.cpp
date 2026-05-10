@@ -1,4 +1,4 @@
-/*
+﻿/*
  * This file is part of the TrinityCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -279,7 +279,7 @@ inline void Battleground::_ProcessOfflineQueue()
                     (GetStatus() == STATUS_IN_PROGRESS || GetStatus() == STATUS_WAIT_JOIN))
                 {
                     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_DESERTER_TRACK);
-                    stmt->setUInt32(0, itr->first.GetCounter());
+                    stmt->setUInt64(0, itr->first.GetCounter());
                     stmt->setUInt8(1, BG_DESERTION_TYPE_OFFLINE);
                     CharacterDatabase.Execute(stmt);
                 }
@@ -762,7 +762,7 @@ void Battleground::EndBattleground(uint32 winner)
             BattlegroundScoreMap::const_iterator score = PlayerScores.find(player->GetGUID().GetCounter());
 
             stmt->setUInt32(0,  battlegroundId);
-            stmt->setUInt32(1,  player->GetGUID().GetCounter());
+            stmt->setUInt64(1,  player->GetGUID().GetCounter());
             stmt->setBool  (2,  team == winner);
             stmt->setUInt32(3,  score->second->GetKillingBlows());
             stmt->setUInt32(4,  score->second->GetDeaths());

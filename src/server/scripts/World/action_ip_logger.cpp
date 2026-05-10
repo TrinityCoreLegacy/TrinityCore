@@ -1,4 +1,4 @@
-/*
+﻿/*
  * This file is part of the TrinityCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -143,11 +143,11 @@ class AccountActionIpLogger : public AccountScript
                 // For those, we need last_ip...
                 LoginDatabasePreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_ALDL_IP_LOGGING);
 
-                stmt->setUInt32(0, playerGuid);
+                stmt->setUInt64(0, playerGuid);
                 stmt->setUInt64(1, characterGuid);
                 stmt->setUInt32(2, realmId);
                 stmt->setUInt8(3, aType);
-                stmt->setUInt32(4, playerGuid);
+                stmt->setUInt64(4, playerGuid);
                 stmt->setString(5, systemNote);
                 LoginDatabase.Execute(stmt);
             }
@@ -155,11 +155,11 @@ class AccountActionIpLogger : public AccountScript
             {
                 LoginDatabasePreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_FACL_IP_LOGGING);
 
-                stmt->setUInt32(0, playerGuid);
+                stmt->setUInt64(0, playerGuid);
                 stmt->setUInt64(1, characterGuid);
                 stmt->setUInt32(2, realmId);
                 stmt->setUInt8(3, aType);
-                stmt->setUInt32(4, playerGuid);
+                stmt->setUInt64(4, playerGuid);
                 stmt->setString(5, systemNote);
                 LoginDatabase.Execute(stmt);
             }
@@ -239,7 +239,7 @@ class CharacterActionIpLogger : public PlayerScript
             // Once we have done everything, we can insert the new log.
             LoginDatabasePreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_CHAR_IP_LOGGING);
 
-            stmt->setUInt32(0, playerGuid);
+            stmt->setUInt64(0, playerGuid);
             stmt->setUInt64(1, characterGuid);
             stmt->setUInt32(2, realmId);
             stmt->setUInt8(3, aType);
@@ -301,11 +301,11 @@ public:
         // Once we have done everything, we can insert the new log.
         LoginDatabasePreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_ALDL_IP_LOGGING);
 
-        stmt->setUInt32(0, playerGuid);
+        stmt->setUInt64(0, playerGuid);
         stmt->setUInt64(1, characterGuid);
         stmt->setUInt32(2, realmId);
         stmt->setUInt8(3, aType);
-        stmt->setUInt32(4, playerGuid);
+        stmt->setUInt64(4, playerGuid);
         stmt->setString(5, systemNote);
 
         // Seeing as the time differences should be minimal, we do not get unixtime and the timestamp right now;

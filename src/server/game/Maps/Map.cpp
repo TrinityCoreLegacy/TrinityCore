@@ -3224,7 +3224,7 @@ void Map::DeleteRespawnInfoFromDB(SpawnObjectType type, ObjectGuid::LowType spaw
 {
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_RESPAWN);
     stmt->setUInt16(0, type);
-    stmt->setUInt32(1, spawnId);
+    stmt->setUInt64(1, spawnId);
     stmt->setUInt16(2, GetId());
     stmt->setUInt32(3, GetInstanceId());
     CharacterDatabase.ExecuteOrAppend(dbTrans, stmt);
@@ -4492,7 +4492,7 @@ void Map::SaveRespawnInfoDB(RespawnInfo const& info, CharacterDatabaseTransactio
 {
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_REP_RESPAWN);
     stmt->setUInt16(0, info.type);
-    stmt->setUInt32(1, info.spawnId);
+    stmt->setUInt64(1, info.spawnId);
     stmt->setUInt64(2, uint64(info.respawnTime));
     stmt->setUInt16(3, GetId());
     stmt->setUInt32(4, GetInstanceId());
@@ -4510,7 +4510,7 @@ void Map::LoadRespawnTimes()
         {
             Field* fields = result->Fetch();
             SpawnObjectType type = SpawnObjectType(fields[0].GetUInt16());
-            ObjectGuid::LowType spawnId = fields[1].GetUInt32();
+            ObjectGuid::LowType spawnId = fields[1].GetUInt64();
             uint64 respawnTime = fields[2].GetUInt64();
 
             if (SpawnData::TypeHasData(type))
@@ -4569,7 +4569,7 @@ void Map::LoadCorpseData()
     {
         Field* fields = result->Fetch();
         CorpseType type = CorpseType(fields[13].GetUInt8());
-        ObjectGuid::LowType guid = fields[16].GetUInt32();
+        ObjectGuid::LowType guid = fields[16].GetUInt64();
         if (type >= MAX_CORPSE_TYPE || type == CORPSE_BONES)
         {
             TC_LOG_ERROR("misc", "Corpse (guid: {}) have wrong corpse type ({}), not loading.", guid, type);

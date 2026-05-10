@@ -1699,7 +1699,7 @@ public:
 
             // Query informations from the DB
             stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_CHAR_PINFO);
-            stmt->setUInt32(0, lowguid);
+            stmt->setUInt64(0, lowguid);
             PreparedQueryResult result = CharacterDatabase.Query(stmt);
 
             if (!result)
@@ -1778,7 +1778,7 @@ public:
         {
             banType = handler->GetTrinityString(LANG_CHARACTER);
             stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_PINFO_BANS);
-            stmt->setUInt32(0, lowguid);
+            stmt->setUInt64(0, lowguid);
             result2 = CharacterDatabase.Query(stmt);
         }
         else
@@ -1795,21 +1795,21 @@ public:
 
         // Can be used to query data from Characters database
         stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_PINFO_XP);
-        stmt->setUInt32(0, lowguid);
+        stmt->setUInt64(0, lowguid);
         PreparedQueryResult result4 = CharacterDatabase.Query(stmt);
 
         if (result4)
         {
             Field* fields = result4->Fetch();
             xp            = fields[0].GetUInt32(); // Used for "current xp" output and "%u XP Left" calculation
-            ObjectGuid::LowType gguid  = fields[1].GetUInt32(); // We check if have a guild for the person, so we might not require to query it at all
+            ObjectGuid::LowType gguid  = fields[1].GetUInt64(); // We check if have a guild for the person, so we might not require to query it at all
             xptotal = sObjectMgr->GetXPForLevel(level);
 
             if (gguid != 0)
             {
                 // Guild Data - an own query, because it may not happen.
                 stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUILD_MEMBER_EXTENDED);
-                stmt->setUInt32(0, lowguid);
+                stmt->setUInt64(0, lowguid);
                 PreparedQueryResult result5 = CharacterDatabase.Query(stmt);
                 if (result5)
                 {
@@ -1919,7 +1919,7 @@ public:
         // Mail Data - an own query, because it may or may not be useful.
         // SQL: "SELECT SUM(CASE WHEN (checked & 1) THEN 1 ELSE 0 END) AS 'readmail', COUNT(*) AS 'totalmail' FROM mail WHERE `receiver` = ?"
         stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_PINFO_MAILS);
-        stmt->setUInt32(0, lowguid);
+        stmt->setUInt64(0, lowguid);
         PreparedQueryResult result6 = CharacterDatabase.Query(stmt);
         if (result6)
         {
@@ -2528,7 +2528,7 @@ public:
 
                 // If player found: delete his freeze aura
                 CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_CHAR_AURA_FROZEN);
-                stmt->setUInt32(0, guid.GetCounter());
+                stmt->setUInt64(0, guid.GetCounter());
                 CharacterDatabase.Execute(stmt);
 
                 handler->PSendSysMessage(LANG_COMMAND_UNFREEZE, name.c_str());

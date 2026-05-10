@@ -178,8 +178,8 @@ void Guild::EventLogEntry::SaveToDB(CharacterDatabaseTransaction trans) const
     stmt->setUInt32(  index, m_guildId);
     stmt->setUInt32(++index, m_guid);
     stmt->setUInt8 (++index, uint8(m_eventType));
-    stmt->setUInt32(++index, m_playerGuid1);
-    stmt->setUInt32(++index, m_playerGuid2);
+    stmt->setUInt64(++index, m_playerGuid1);
+    stmt->setUInt64(++index, m_playerGuid2);
     stmt->setUInt8 (++index, m_newRank);
     stmt->setUInt64(++index, m_timestamp);
     trans->Append(stmt);
@@ -216,7 +216,7 @@ void Guild::BankEventLogEntry::SaveToDB(CharacterDatabaseTransaction trans) cons
     stmt->setUInt32(++index, m_guid);
     stmt->setUInt8 (++index, m_bankTabId);
     stmt->setUInt8 (++index, uint8(m_eventType));
-    stmt->setUInt32(++index, m_playerGuid);
+    stmt->setUInt64(++index, m_playerGuid);
     stmt->setUInt32(++index, m_itemOrMoney);
     stmt->setUInt16(++index, m_itemStackCount);
     stmt->setUInt8 (++index, m_destTabId);
@@ -381,7 +381,7 @@ void Guild::BankTab::LoadFromDB(Field* fields)
 bool Guild::BankTab::LoadItemFromDB(Field* fields)
 {
     uint8 slotId = fields[13].GetUInt8();
-    ObjectGuid::LowType itemGuid = fields[14].GetUInt32();
+    ObjectGuid::LowType itemGuid = fields[14].GetUInt64();
     uint32 itemEntry = fields[15].GetUInt32();
     if (slotId >= GUILD_BANK_MAX_SLOTS)
     {
@@ -484,7 +484,7 @@ bool Guild::BankTab::SetItem(CharacterDatabaseTransaction trans, uint8 slotId, I
         stmt->setUInt32(0, m_guildId);
         stmt->setUInt8 (1, m_tabId);
         stmt->setUInt8 (2, slotId);
-        stmt->setUInt32(3, item->GetGUID().GetCounter());
+        stmt->setUInt64(3, item->GetGUID().GetCounter());
         trans->Append(stmt);
 
         item->SetGuidValue(ITEM_FIELD_CONTAINED, ObjectGuid::Empty);
@@ -558,7 +558,7 @@ void Guild::Member::SetPublicNote(std::string_view publicNote)
 
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UPD_GUILD_MEMBER_PNOTE);
     stmt->setString(0, m_publicNote);
-    stmt->setUInt32(1, m_guid.GetCounter());
+    stmt->setUInt64(1, m_guid.GetCounter());
     CharacterDatabase.Execute(stmt);
 }
 
@@ -571,7 +571,7 @@ void Guild::Member::SetOfficerNote(std::string_view officerNote)
 
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UPD_GUILD_MEMBER_OFFNOTE);
     stmt->setString(0, m_officerNote);
-    stmt->setUInt32(1, m_guid.GetCounter());
+    stmt->setUInt64(1, m_guid.GetCounter());
     CharacterDatabase.Execute(stmt);
 }
 
@@ -585,7 +585,7 @@ void Guild::Member::ChangeRank(CharacterDatabaseTransaction trans, uint8 newRank
 
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UPD_GUILD_MEMBER_RANK);
     stmt->setUInt8 (0, newRank);
-    stmt->setUInt32(1, m_guid.GetCounter());
+    stmt->setUInt64(1, m_guid.GetCounter());
     CharacterDatabase.ExecuteOrAppend(trans, stmt);
 }
 
@@ -598,7 +598,7 @@ void Guild::Member::SaveToDB(CharacterDatabaseTransaction trans) const
 {
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_GUILD_MEMBER);
     stmt->setUInt32(0, m_guildId);
-    stmt->setUInt32(1, m_guid.GetCounter());
+    stmt->setUInt64(1, m_guid.GetCounter());
     stmt->setUInt8 (2, m_rankId);
     stmt->setString(3, m_publicNote);
     stmt->setString(4, m_officerNote);
@@ -672,7 +672,7 @@ void Guild::Member::UpdateBankWithdrawValue(CharacterDatabaseTransaction trans, 
     m_bankWithdraw[tabId] += amount;
 
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_GUILD_MEMBER_WITHDRAW);
-    stmt->setUInt32(0, m_guid.GetCounter());
+    stmt->setUInt64(0, m_guid.GetCounter());
     for (uint8 i = 0; i <= GUILD_BANK_MAX_TABS;)
     {
         uint32 withdraw = m_bankWithdraw[i++];
@@ -1115,7 +1115,7 @@ bool Guild::Create(Player* pLeader, std::string_view name)
     stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_GUILD);
     stmt->setUInt32(  index, m_id);
     stmt->setString(++index, m_name);
-    stmt->setUInt32(++index, m_leaderGuid.GetCounter());
+    stmt->setUInt64(++index, m_leaderGuid.GetCounter());
     stmt->setString(++index, m_info);
     stmt->setString(++index, m_motd);
     stmt->setUInt64(++index, uint32(m_createdDate));
@@ -1917,7 +1917,7 @@ bool Guild::LoadFromDB(Field* fields)
 {
     m_id            = fields[0].GetUInt32();
     m_name          = fields[1].GetString();
-    m_leaderGuid    = ObjectGuid(HighGuid::Player, fields[2].GetUInt32());
+    m_leaderGuid    = ObjectGuid(HighGuid::Player, fields[2].GetUInt64());
     m_emblemInfo.LoadFromDB(fields);
     m_info          = fields[8].GetString();
     m_motd          = fields[9].GetString();
@@ -1946,7 +1946,7 @@ void Guild::LoadRankFromDB(Field* fields)
 
 bool Guild::LoadMemberFromDB(Field* fields)
 {
-    ObjectGuid::LowType lowguid = fields[1].GetUInt32();
+    ObjectGuid::LowType lowguid = fields[1].GetUInt64();
     ObjectGuid playerGuid(HighGuid::Player, lowguid);
 
     auto [memberIt, isNew] = m_members.try_emplace(lowguid, m_id, playerGuid, fields[2].GetUInt8());
@@ -1986,8 +1986,8 @@ bool Guild::LoadEventLogFromDB(Field* fields)
             fields[1].GetUInt32(),                      // guid
             time_t(fields[6].GetUInt32()),              // timestamp
             GuildEventLogTypes(fields[2].GetUInt8()),   // event type
-            fields[3].GetUInt32(),                      // player guid 1
-            fields[4].GetUInt32(),                      // player guid 2
+            fields[3].GetUInt64(),                      // player guid 1
+            fields[4].GetUInt64(),                      // player guid 2
             fields[5].GetUInt8());                     // rank
         return true;
     }
@@ -2004,7 +2004,7 @@ bool Guild::LoadBankEventLogFromDB(Field* fields)
         LogHolder<BankEventLogEntry>& bankLog = m_bankEventLog[tabId];
         if (bankLog.CanInsert())
         {
-            ObjectGuid::LowType guid = fields[2].GetUInt32();
+            ObjectGuid::LowType guid = fields[2].GetUInt64();
             GuildBankEventLogTypes eventType = GuildBankEventLogTypes(fields[3].GetUInt8());
             if (BankEventLogEntry::IsMoneyEvent(eventType))
             {
@@ -2025,7 +2025,7 @@ bool Guild::LoadBankEventLogFromDB(Field* fields)
                 time_t(fields[8].GetUInt32()),          // timestamp
                 dbTabId,                                // tab id
                 eventType,                              // event type
-                fields[4].GetUInt32(),                  // player guid
+                fields[4].GetUInt64(),                  // player guid
                 fields[5].GetUInt32(),                  // item or money
                 fields[6].GetUInt16(),                  // itam stack count
                 fields[7].GetUInt8());                  // dest tab id
@@ -2049,7 +2049,7 @@ bool Guild::LoadBankItemFromDB(Field* fields)
     if (tabId >= _GetPurchasedTabsSize())
     {
         TC_LOG_ERROR("guild", "Invalid tab for item (GUID: {}, id: #{}) in guild bank, skipped.",
-            fields[14].GetUInt32(), fields[15].GetUInt32());
+            fields[14].GetUInt64(), fields[15].GetUInt32());
         return false;
     }
     return m_bankTabs[tabId].LoadItemFromDB(fields);
@@ -2231,7 +2231,7 @@ bool Guild::AddMember(CharacterDatabaseTransaction trans, ObjectGuid guid, uint8
         bool ok = false;
         // Player must exist
         CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_CHAR_DATA_FOR_GUILD);
-        stmt->setUInt32(0, lowguid);
+        stmt->setUInt64(0, lowguid);
         if (PreparedQueryResult result = CharacterDatabase.Query(stmt))
         {
             Field* fields = result->Fetch();
@@ -2408,7 +2408,7 @@ bool Guild::_HasRankRight(Player* player, uint32 right) const
 void Guild::_DeleteMemberFromDB(CharacterDatabaseTransaction trans, ObjectGuid::LowType lowguid)
 {
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_GUILD_MEMBER);
-    stmt->setUInt32(0, lowguid);
+    stmt->setUInt64(0, lowguid);
     CharacterDatabase.ExecuteOrAppend(trans, stmt);
 }
 
@@ -2540,7 +2540,7 @@ void Guild::_SetLeader(CharacterDatabaseTransaction trans, Member& leader)
     leader.ChangeRank(trans, GR_GUILDMASTER);
 
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UPD_GUILD_LEADER);
-    stmt->setUInt32(0, m_leaderGuid.GetCounter());
+    stmt->setUInt64(0, m_leaderGuid.GetCounter());
     stmt->setUInt32(1, m_id);
     trans->Append(stmt);
 

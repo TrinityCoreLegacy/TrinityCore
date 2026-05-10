@@ -18,6 +18,7 @@
 #ifndef TRINITY_SPAWNDATA_H
 #define TRINITY_SPAWNDATA_H
 
+#include "ObjectGuid.h"
 #include "Position.h"
 
 class Creature;
@@ -82,7 +83,7 @@ struct SpawnMetadata
     SpawnData const* ToSpawnData() const { return TypeHasData(type) ? reinterpret_cast<SpawnData const*>(this) : nullptr; }
 
     SpawnObjectType const type;
-    uint32 spawnId = 0;
+    ObjectGuid::LowType spawnId = 0;
     uint32 mapId = MAPID_INVALID;
     bool dbData = true;
     SpawnGroupTemplateData const* spawnGroupData = nullptr;

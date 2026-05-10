@@ -74,7 +74,7 @@ void LFGMgr::_LoadFromDB(Field* fields, ObjectGuid guid)
     if (!guid.IsGroup())
         return;
 
-    SetLeader(guid, ObjectGuid(HighGuid::Player, fields[0].GetUInt32()));
+    SetLeader(guid, ObjectGuid(HighGuid::Player, fields[0].GetUInt64()));
 
     uint32 dungeon = fields[17].GetUInt32();
     uint8 state = fields[18].GetUInt8();
@@ -103,11 +103,11 @@ void LFGMgr::_SaveToDB(ObjectGuid guid, uint32 db_guid)
     CharacterDatabaseTransaction trans = CharacterDatabase.BeginTransaction();
 
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_LFG_DATA);
-    stmt->setUInt32(0, db_guid);
+    stmt->setUInt64(0, db_guid);
     trans->Append(stmt);
 
     stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_LFG_DATA);
-    stmt->setUInt32(0, db_guid);
+    stmt->setUInt64(0, db_guid);
     stmt->setUInt32(1, GetDungeon(guid));
     stmt->setUInt32(2, GetState(guid));
     trans->Append(stmt);

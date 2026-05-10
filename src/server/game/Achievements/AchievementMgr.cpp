@@ -1,4 +1,4 @@
-/*
+﻿/*
  * This file is part of the TrinityCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -539,11 +539,11 @@ void AchievementMgr::DeleteFromDB(ObjectGuid guid)
     CharacterDatabaseTransaction trans = CharacterDatabase.BeginTransaction();
 
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_CHAR_ACHIEVEMENT);
-    stmt->setUInt32(0, guid.GetCounter());
+    stmt->setUInt64(0, guid.GetCounter());
     trans->Append(stmt);
 
     stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_CHAR_ACHIEVEMENT_PROGRESS);
-    stmt->setUInt32(0, guid.GetCounter());
+    stmt->setUInt64(0, guid.GetCounter());
     trans->Append(stmt);
 
     CharacterDatabase.CommitTransaction(trans);
@@ -560,11 +560,11 @@ void AchievementMgr::SaveToDB(CharacterDatabaseTransaction trans)
 
             CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_CHAR_ACHIEVEMENT_BY_ACHIEVEMENT);
             stmt->setUInt16(0, completedAchievement.first);
-            stmt->setUInt32(1, GetPlayer()->GetGUID().GetCounter());
+            stmt->setUInt64(1, GetPlayer()->GetGUID().GetCounter());
             trans->Append(stmt);
 
             stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_CHAR_ACHIEVEMENT);
-            stmt->setUInt32(0, GetPlayer()->GetGUID().GetCounter());
+            stmt->setUInt64(0, GetPlayer()->GetGUID().GetCounter());
             stmt->setUInt16(1, completedAchievement.first);
             stmt->setUInt32(2, uint32(completedAchievement.second.date));
             trans->Append(stmt);
@@ -581,14 +581,14 @@ void AchievementMgr::SaveToDB(CharacterDatabaseTransaction trans)
                 continue;
 
             CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_CHAR_ACHIEVEMENT_PROGRESS_BY_CRITERIA);
-            stmt->setUInt32(0, GetPlayer()->GetGUID().GetCounter());
+            stmt->setUInt64(0, GetPlayer()->GetGUID().GetCounter());
             stmt->setUInt16(1, criteriaProgres.first);
             trans->Append(stmt);
 
             if (criteriaProgres.second.counter)
             {
                 stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_CHAR_ACHIEVEMENT_PROGRESS);
-                stmt->setUInt32(0, GetPlayer()->GetGUID().GetCounter());
+                stmt->setUInt64(0, GetPlayer()->GetGUID().GetCounter());
                 stmt->setUInt16(1, criteriaProgres.first);
                 stmt->setUInt32(2, criteriaProgres.second.counter);
                 stmt->setUInt32(3, uint32(criteriaProgres.second.date));
