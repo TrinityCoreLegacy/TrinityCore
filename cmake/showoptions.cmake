@@ -5,6 +5,7 @@ get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 if(NOT IS_MULTI_CONFIG)
   message("* TrinityCore buildtype  : ${CMAKE_BUILD_TYPE}")
 endif()
+message("* C++ standard           : C++${TRINITY_CXX_STANDARD}")
 message("")
 
 # output information about installation-directories and locations

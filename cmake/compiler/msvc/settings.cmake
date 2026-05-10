@@ -1,5 +1,5 @@
-set(MSVC_EXPECTED_VERSION 19.32)
-set(MSVC_EXPECTED_VERSION_STRING "Microsoft Visual Studio 2022 17.2")
+set(MSVC_EXPECTED_VERSION 19.36)
+set(MSVC_EXPECTED_VERSION_STRING "Microsoft Visual Studio 2022 17.6")
 
 # This file is also used by compilers that pretend to be MSVC but report their own version number - don't version check them
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -26,7 +26,8 @@ target_compile_options(trinity-warning-interface
 # disable permissive mode to make msvc more eager to reject code that other compilers don't already accept
 target_compile_options(trinity-compile-option-interface
   INTERFACE
-    /permissive-)
+    /permissive-
+    /utf-8)  # set source and execution character set to UTF-8
 
 if(PLATFORM EQUAL 32)
   # mark 32 bit executables large address aware so they can use > 2GB address space

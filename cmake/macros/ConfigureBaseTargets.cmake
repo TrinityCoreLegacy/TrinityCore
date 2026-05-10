@@ -11,9 +11,9 @@
 # An interface library to make the target com available to other targets
 add_library(trinity-compile-option-interface INTERFACE)
 
-# Use -std=c++11 instead of -std=gnu++11
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD ${TRINITY_CXX_STANDARD})
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Set build-directive (used in core to tell which buildtype we used)
 target_compile_definitions(trinity-compile-option-interface
@@ -68,3 +68,7 @@ target_link_libraries(trinity-core-interface
   INTERFACE
     trinity-default-interface
     trinity-warning-interface)
+
+target_compile_features(trinity-core-interface
+  INTERFACE
+    "cxx_std_${TRINITY_CXX_STANDARD}")

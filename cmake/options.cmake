@@ -8,6 +8,12 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+set(TRINITY_CXX_STANDARD "20" CACHE STRING "C++ standard version to build with (20 or 23)")
+set_property(CACHE TRINITY_CXX_STANDARD PROPERTY STRINGS 20 23)
+if(NOT TRINITY_CXX_STANDARD MATCHES "^(20|23)$")
+  message(FATAL_ERROR "TRINITY_CXX_STANDARD must be 20 or 23, got: ${TRINITY_CXX_STANDARD}")
+endif()
+
 option(SERVERS          "Build worldserver and authserver"                            1)
 
 set(SCRIPTS_AVAILABLE_OPTIONS none static dynamic minimal-static minimal-dynamic)
